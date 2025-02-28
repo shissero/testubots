@@ -6,9 +6,9 @@ public class Iniciar {
 
         Historico.construir();
 
-        externo:
+        externo: // TODO: é realmente necessário esse rótulo? Acho que dá para refazer esse código sem isso
         do {
-            System.out.println("1 - Listar clientes por maior total em compras");
+            System.out.println("1 - Listar clientes por maior total em compras"); // TODO: melhor refazer essa parte usando o mesmo método de navegação usado no CRUD de Linguagem de Programação I
             System.out.println("2 - Mostrar o(s) cliente(s) com a(s) maior(es) compra(s) única(s) do ano");
             System.out.println("3 - Listar clientes mais fiéis");
             System.out.println("4 - Recomendar vinho para um cliente");

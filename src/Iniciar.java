@@ -4,6 +4,10 @@ public class Iniciar {
 
     public static void main(String[] args){
 
+        IRepositorioCliente repositorioCliente = new IRepositorioCliente();
+
+        repositorioCliente.carregarTodosClientes();
+
         Historico.construir();
 
         externo: // TODO: é realmente necessário esse rótulo? Acho que dá para refazer esse código sem isso

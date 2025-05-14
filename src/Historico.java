@@ -11,7 +11,6 @@ import java.util.List;
 public class Historico {
 
     private static List<Compra> todasAsCompras = new ArrayList<>();
-    private static List<Cliente> todosOsClientes = new ArrayList<>();
     private static List<Item> todosOsItens = new ArrayList<>();
 
 
@@ -101,8 +100,8 @@ public class Historico {
 
                 todasAsCompras.add(compra);
 
-                for (Cliente a : todosOsClientes)
-                    if (compra.obterCliente().obterID() == (a.obterID())) a.adicionarCompra(compra);
+                //for (Cliente a : todosOsClientes)
+                  //  if (compra.obterCliente().obterID() == (a.obterID())) a.adicionarCompra(compra);
 
                 linha = bufferedReader.readLine(); // Lê a chave que finaliza a descrição de uma compra
                 linha = bufferedReader.readLine(); // Lê a chave que finaliza inicia a descrição da próxima compra, ou que finaliza o histórico
@@ -141,7 +140,7 @@ public class Historico {
                 linha = bufferedReader.readLine();
                 cliente.definirCPF(extrairInformacao(linha, 3));
 
-                todosOsClientes.add(cliente);
+                //todosOsClientes.add(cliente);
 
                 bufferedReader.readLine(); // Descarta-se a chave que finaliza a descrição do cliente
 
@@ -177,19 +176,20 @@ public class Historico {
      */
     private static void calcularTotais() {
         for (Compra a : todasAsCompras) {
-            for (Cliente b : todosOsClientes) {
-                if (a.obterCliente().obterCPF().equals(b.obterCPF())) {
-                    b.incrementarValorTotal(a.obterValorTotal());
-                    break;
-                }
-            }
+            //for (Cliente b : todosOsClientes) {
+              //  if (a.obterCliente().obterCPF().equals(b.obterCPF())) {
+                //    b.incrementarValorTotal(a.obterValorTotal());
+                  //  break;
+                //}
+            //}
         }
     }
 
     public static List<Cliente> obterClientesPorTotal() {
-        Ordenacao.ordenarPorTotal(0, todosOsClientes.size() - 1);
+        //Ordenacao.ordenarPorTotal(0, todosOsClientes.size() - 1);
 
-        return todosOsClientes;
+        //return todosOsClientes;
+        return null;
     }
 
     static class Ordenacao {
@@ -207,18 +207,18 @@ public class Historico {
 
         static int particionar(int inicio, int fim) {
 
-            float pivot = todosOsClientes.get(fim).obterTotalCompras();
+            //float pivot = todosOsClientes.get(fim).obterTotalCompras();
             int i = inicio - 1;
 
             for (int j = inicio; j <= fim - 1; j++) {
-                if (todosOsClientes.get(j).obterTotalCompras() >= pivot) {
+              //  if (todosOsClientes.get(j).obterTotalCompras() >= pivot) {
                     i++;
 
-                    Collections.swap(todosOsClientes, i, j);
-                }
+                //    Collections.swap(todosOsClientes, i, j);
+                //}
             }
 
-            Collections.swap(todosOsClientes, i + 1, fim);
+            //Collections.swap(todosOsClientes, i + 1, fim);
 
             return i + 1;
         }
@@ -249,7 +249,7 @@ public class Historico {
     public static List<Cliente> obterClientesMaisFieis() {
         List<Cliente> clientesFieis = new ArrayList<>();
 
-        for (Cliente a : todosOsClientes) {
+        /*for (Cliente a : todosOsClientes) {
             if (clientesFieis.isEmpty()) clientesFieis.add(a);
             else {
                 for (Cliente b : clientesFieis) {
@@ -264,7 +264,7 @@ public class Historico {
 
                 if (clientesFieis.size() > 3) clientesFieis.remove(clientesFieis.size() - 1);
             }
-        }
+        }*/
 
         return clientesFieis;
     }
@@ -274,7 +274,7 @@ public class Historico {
         String str = Cliente.validarCPF(cpf);
 
 
-        for (Cliente a : todosOsClientes) if (a.obterCPF().equals(str)) return a;
+        //for (Cliente a : todosOsClientes) if (a.obterCPF().equals(str)) return a;
 
         System.out.println("CPF " + str + " não encontrado");
         return null;
@@ -286,7 +286,7 @@ public class Historico {
      */
     static void finalizarClientes() {
 
-        for (Cliente a : todosOsClientes) {
+        /*for (Cliente a : todosOsClientes) {
 
             for (Compra b : a.obterHistorico()) {
 
@@ -297,7 +297,7 @@ public class Historico {
 
             for (Item d : todosOsItens)
                 if (!Conjunto.pertence(d, a.obterVinhosComprados())) a.adicionarVinhoNaoComprado(d);
-        }
+        }*/
     }
 
     /**
@@ -308,10 +308,10 @@ public class Historico {
 
         for (Item a : todosOsItens) {
 
-            for (Cliente b : todosOsClientes) {
+            /*for (Cliente b : todosOsClientes) {
                 if (Conjunto.pertence(a, b.obterVinhosComprados())) a.adicionarComprador(b);
                 else a.adicionarNaoComprador(b);
-            }
+            }*/
 
         }
     }

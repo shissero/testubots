@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: provavelmente o Java já tem as funções que essa classe implementa
+/**
+ * Classe auxiliar para fazer operações entre objetos
+ */
 public class Conjunto {
     public static <T> List<T> intersecao(List<T> lista1, List<T> lista2){
 

@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * Esta classe representa a interface para os repositórios da classe Cliente.
  * Os métodos estão sendo implementados nela somente para facilitar a refatoração mais tarde.
  */
-public class IRepositorioCliente {
+public class IRepositorioClientes {
 
     /**
      * Esta implementação é provisória, pretendo integrar com o MySQL assim que instalar mais armazenamento interno na minha máquina

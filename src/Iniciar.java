@@ -4,7 +4,7 @@ public class Iniciar {
 
     public static void main(String[] args){
 
-        IRepositorioCliente repositorioCliente = new IRepositorioCliente();
+        IRepositorioClientes repositorioCliente = new IRepositorioClientes();
 
         repositorioCliente.carregarTodosClientes();
 

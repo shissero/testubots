@@ -17,8 +17,9 @@ import java.util.stream.Collectors;
 public class IRepositorioClientes {
 
     /**
-     * Esta implementação é provisória, pretendo integrar com o MySQL assim que instalar mais armazenamento interno na minha máquina
+     * Esta função carrega na memória todos os clientes.
      */
+     // Esta implementação é provisória, pretendo integrar com o MySQL assim que instalar mais armazenamento interno na minha máquina
     public void carregarTodosClientes() {
 
         String arquivo_clientes = "res/clientes";

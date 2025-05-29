@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +11,7 @@ public class Compra {
 
     // Definindo campos
     private String codigo;
-    private ZonedDateTime data;
+    private LocalDate data;
     private Cliente cliente;
     private List<Item> itens = new ArrayList<>();
     private float valorTotal = 0;
@@ -28,9 +27,7 @@ public class Compra {
 
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy"); // TODO: que tal criar uma classe para cuidar da validação desses dados e passar um objeto LocalDate para o setter?
 
-        LocalDate date = LocalDate.parse(data, formato);
-
-        this.data = date.atStartOfDay(ZoneId.systemDefault());
+        this.data = LocalDate.parse(data, formato);
     }
 
     public void definirCliente(Cliente cliente) {
@@ -56,7 +53,7 @@ public class Compra {
         return codigo;
     }
 
-    public ZonedDateTime obterData() {
+    public LocalDate obterData() {
         return data;
     }
 

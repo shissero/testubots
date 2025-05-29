@@ -120,15 +120,15 @@ public class Iniciar {
                 System.out.println("Nenhum cliente encontrado");
             }
             else{
-                Item item = cliente.sugerirVinho();
-                if(item == null) System.out.println("Nada para recomendar");
+                Vinho vinho = cliente.sugerirVinho();
+                if(vinho == null) System.out.println("Nada para recomendar");
                 else {
-                    System.out.println(item.obterProduto() + ", " +
-                            item.obterVariedade() + ", " +
-                            item.obterVariedade() + ", " +
-                            item.obterPais() + ", " +
-                            item.obterCategoria() + ", " +
-                            item.obterSafra() + ".\n");
+                    System.out.println(vinho.obterProduto() + ", " +
+                            vinho.obterVariedade() + ", " +
+                            vinho.obterVariedade() + ", " +
+                            vinho.obterPais() + ", " +
+                            vinho.obterCategoria() + ", " +
+                            vinho.obterSafra() + ".\n");
                 }
             }
 

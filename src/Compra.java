@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,7 @@ public class Compra {
     private String codigo;
     private LocalDate data;
     private Cliente cliente;
-    private List<Item> itens = new ArrayList<>();
+    private List<Vinho> vinhos = new ArrayList<>();
     private float valorTotal = 0;
 
 
@@ -38,8 +37,8 @@ public class Compra {
         this.valorTotal = valor;
     }
 
-    public void adicionarItem(Item item) {
-        itens.add(item);
+    public void adicionarVinho(Vinho vinho) {
+        vinhos.add(vinho);
     }
 
 
@@ -57,8 +56,8 @@ public class Compra {
         return data;
     }
 
-    public List<Item> obterItens() {
-        return itens;
+    public List<Vinho> obterVinhos() {
+        return vinhos;
     }
 
     public float obterValorTotal() {

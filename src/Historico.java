@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 // TODO: essa classe é um repositório, deve ser refatorada
@@ -11,7 +10,7 @@ import java.util.List;
 public class Historico {
 
     private static List<Compra> todasAsCompras = new ArrayList<>();
-    private static List<Item> todosOsItens = new ArrayList<>();
+    private static List<Vinho> todosOsVinhos = new ArrayList<>();
 
 
     private Historico() {
@@ -49,7 +48,7 @@ public class Historico {
             do {
 
                 Compra compra = new Compra();
-                Item item = new Item();
+                Vinho vinho = new Vinho();
 
                 linha = bufferedReader.readLine();
                 compra.definirCodigo(extrairInformacao(linha, 3));
@@ -68,28 +67,28 @@ public class Historico {
                     linha = bufferedReader.readLine();
 
                     if (linha.contains("codigo")) {
-                        item.definirCodigo(extrairInformacao(linha, 3));
+                        vinho.definirCodigo(extrairInformacao(linha, 3));
                         linha = bufferedReader.readLine();
                     }
 
-                    item.definirProduto(extrairInformacao(linha, 3));
+                    vinho.definirProduto(extrairInformacao(linha, 3));
 
                     linha = bufferedReader.readLine();
-                    item.definirVariedade(extrairInformacao(linha, 3));
+                    vinho.definirVariedade(extrairInformacao(linha, 3));
 
                     linha = bufferedReader.readLine();
-                    item.definirPais(extrairInformacao(linha, 3));
+                    vinho.definirPais(extrairInformacao(linha, 3));
 
                     linha = bufferedReader.readLine();
-                    item.definirCategoria(extrairInformacao(linha, 3));
+                    vinho.definirCategoria(extrairInformacao(linha, 3));
 
                     linha = bufferedReader.readLine();
-                    item.definirSafra(Integer.parseInt(extrairInformacao(linha, 3)));
+                    vinho.definirSafra(Integer.parseInt(extrairInformacao(linha, 3)));
 
                     linha = bufferedReader.readLine();
-                    item.definirPreco(Float.parseFloat(extrairInformacao(linha, 2).substring(2)));
+                    vinho.definirPreco(Float.parseFloat(extrairInformacao(linha, 2).substring(2)));
 
-                    compra.adicionarItem(item);
+                    compra.adicionarVinho(vinho);
 
                     linha = bufferedReader.readLine(); // Lê a chave que encerra a descrição de um item
                     linha = bufferedReader.readLine(); // Lê a chave que inicia a descrição do próximo item ou o colchete que finaliza a lista de itens da compra atual
@@ -158,8 +157,8 @@ public class Historico {
     private static void armazenarItens() {
 
         for (Compra a : todasAsCompras) {
-            for (Item b : a.obterItens()) {
-                if (!Conjunto.pertence(b, todosOsItens)) todosOsItens.add(b);
+            for (Vinho b : a.obterVinhos()) {
+                if (!Conjunto.pertence(b, todosOsVinhos)) todosOsVinhos.add(b);
             }
         }
     }
@@ -306,7 +305,7 @@ public class Historico {
      */
     static void finalizarItens() {
 
-        for (Item a : todosOsItens) {
+        for (Vinho a : todosOsVinhos) {
 
             /*for (Cliente b : todosOsClientes) {
                 if (Conjunto.pertence(a, b.obterVinhosComprados())) a.adicionarComprador(b);
@@ -316,7 +315,7 @@ public class Historico {
         }
     }
 
-    public static List<Item> obterTodosOsItens() {
-        return todosOsItens;
+    public static List<Vinho> obterTodosOsItens() {
+        return todosOsVinhos;
     }
 }

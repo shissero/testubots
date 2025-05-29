@@ -18,8 +18,8 @@ public class Cliente {
     private String cpf;
     private List<Compra> compras = new ArrayList<>();
     private float totalCompras = 0.0f; // TODO: essa variável é realmente necessária? Alterar o getter dela para iterar pela variável compras não é melhor?
-    private List<Item> vinhosComprados = new ArrayList<>();
-    private List<Item> vinhosNaoComprados = new ArrayList<>();
+    private List<Vinho> vinhosComprados = new ArrayList<>();
+    private List<Vinho> vinhosNaoComprados = new ArrayList<>();
 
 
     // Definindo setters
@@ -41,11 +41,11 @@ public class Cliente {
         compras.add(compra);
     }
 
-    public void adicionarVinhoComprado(Item vinho) {
+    public void adicionarVinhoComprado(Vinho vinho) {
         vinhosComprados.add(vinho);
     }
 
-    public void adicionarVinhoNaoComprado(Item vinho) {
+    public void adicionarVinhoNaoComprado(Vinho vinho) {
         vinhosNaoComprados.add(vinho);
     }
 
@@ -71,7 +71,7 @@ public class Cliente {
         return totalCompras;
     }
 
-    public List<Item> obterVinhosComprados() {
+    public List<Vinho> obterVinhosComprados() {
         return vinhosComprados;
     }
 
@@ -87,9 +87,9 @@ public class Cliente {
 
 
 
-    public Item sugerirVinho() { // TODO: isso podia ser um getter - obterSugestao
+    public Vinho sugerirVinho() { // TODO: isso podia ser um getter - obterSugestao
 
-        Item item = null;
+        Vinho vinho = null;
 
         // Estas duas variáveis armazenam, respectivamente, a soma das similaridades entre todos os clientes
         // que compraram o vinho e a soma das similaridades entre todos os clientes que nao compraram o vinho
@@ -97,7 +97,7 @@ public class Cliente {
         float probabilidade = -1.0f, probAux;
 
 
-        for (Item a : Historico.obterTodosOsItens()) {
+        for (Vinho a : Historico.obterTodosOsItens()) {
 
             List<Cliente> compradores = a.obterCompradores();
             List<Cliente> naoCompradores = a.obterNaoCompradores();
@@ -109,11 +109,11 @@ public class Cliente {
 
             if (probAux >= probabilidade) {
                 probabilidade = probAux;
-                item = a;
+                vinho = a;
             }
         }
 
-        return item == null ? this.vinhosComprados.get(0) : item;
+        return vinho == null ? this.vinhosComprados.get(0) : vinho;
     }
 
     public float similaridade(Cliente cliente) { // TODO: podia ser um getter

@@ -4,7 +4,7 @@ import java.util.List;
 /**
  * Esta classe representa os vinhos
  */
-public class Item { // TODO: renomear essa classe para Vinho
+public class Vinho { // TODO: renomear essa classe para Vinho
 
     // Definindo campos
     private String codigo;

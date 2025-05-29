@@ -4,7 +4,7 @@ import java.util.List;
 /**
  * Esta classe representa os vinhos
  */
-public class Vinho { // TODO: renomear essa classe para Vinho
+public class Vinho {
 
     // Definindo campos
     private String codigo;
@@ -115,11 +115,12 @@ public class Vinho { // TODO: renomear essa classe para Vinho
         return SSN;
     }
 
-    public boolean equals(Item item) { // TODO: remover método já que não está sendo usado
-        return this.produto.equals(item.produto) &&
-                this.variedade.equals(item.variedade) &&
-                this.pais.equals(item.pais) &&
-                this.categoria.equals(item.categoria) &&
-                this.safra == item.safra;
+    public boolean equals(Vinho vinho) { // Esse método é necessário ao extrair os dados dos arquivos json. Nesses arquivos, os vinhos não vêm com uma informação específica que os identifique.
+
+        return this.produto.equals(vinho.produto) && // Se for incluir o código do produto nesta comparação, alter o método IRepositórioVinhos.buscarVinhoPorVinho, pois este espera que o método equals ignore o campo Vinho.código
+                this.variedade.equals(vinho.variedade) &&
+                this.pais.equals(vinho.pais) &&
+                this.categoria.equals(vinho.categoria) &&
+                this.safra == vinho.safra;
     }
 }

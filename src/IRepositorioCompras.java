@@ -28,7 +28,8 @@ public class IRepositorioCompras {
 
             reader.close();
 
-            Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, (JsonDeserializer<LocalDate>) (json, type, jsonDeserializationContext) -> {
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(LocalDate.class, (JsonDeserializer<LocalDate>) (json, type, jsonDeserializationContext) -> {
 
                 try {
                     return LocalDate.parse(json.getAsJsonPrimitive().getAsString(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
@@ -46,7 +47,8 @@ public class IRepositorioCompras {
                                                     json.getAsJsonPrimitive().getAsString()
                                             )
                                     )
-                                    .get())
+                                    .get()
+                    )
                     .create();
 
             TypeToken<List<Compra>> collectionType = new TypeToken<>() {

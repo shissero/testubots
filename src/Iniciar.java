@@ -1,14 +1,18 @@
 import java.util.Scanner;
 
-public class Iniciar {
+public class Iniciar { // TODO: é necessário documentar o código
 
     public static IRepositorioClientes repositorioClientes;
+    public static IRepositorioVinhos repositorioVinhos;
 
     public static void main(String[] args){
 
-        IRepositorioClientes repositorioCliente = new IRepositorioClientes();
+        repositorioClientes = new IRepositorioClientes();
+        repositorioVinhos = new IRepositorioVinhos();
+        var repositorioCompras = new IRepositorioCompras();
 
-        repositorioCliente.carregarTodosClientes();
+        repositorioClientes.carregarTodosClientes();
+        repositorioCompras.carregarTodasCompras(repositorioClientes);
 
         Historico.construir();
 

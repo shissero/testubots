@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Iniciar { // TODO: é necessário criar o script de execução na IntelliJ. Por causa disso, não está sendo possível executar o projeto de qualquer arquivo
+public class Iniciar {
 
     public static IRepositorioClientes repositorioClientes;
 

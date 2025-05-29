@@ -1,12 +1,8 @@
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializer;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.lang.reflect.Type;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -32,19 +28,8 @@ public class IRepositorioClientes {
 
             reader.close();
 
-            Gson gson = new GsonBuilder().registerTypeAdapter(ZonedDateTime.class, (JsonDeserializer<ZonedDateTime>) (json, type, jsonDeserializationContext) -> {
-
-                try{
-                    return ZonedDateTime.parse(json.getAsJsonPrimitive().getAsString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-                } catch (DateTimeParseException e){
-                    return ZonedDateTime.parse(json.getAsJsonPrimitive().getAsString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS"));
-                }
-
-            }).create();
-
-            TypeToken<List<Cliente>> collectionType = new TypeToken<>() {};
-
-            todosOsClientes = gson.fromJson(clientes_json, collectionType);
+            Type listType = new TypeToken<ArrayList<Cliente>>(){}.getType();
+            todosOsClientes = new Gson().fromJson(clientes_json, listType);
         }
         catch (FileNotFoundException e) {
 
@@ -62,9 +47,9 @@ public class IRepositorioClientes {
         todosOsClientes.add(cliente);
     }
 
-    public Optional<Cliente> buscarPorId(int id) {
+    public Optional<Cliente> buscarPorCPF(String cpf) {
 
-        return todosOsClientes.stream().findFirst();
+        return todosOsClientes.stream().filter(x -> x.obterCPF().equals(cpf)).findFirst();
     }
 
     void atualizar(Cliente cli_novo) {

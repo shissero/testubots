@@ -1,3 +1,5 @@
+import com.google.gson.annotations.JsonAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,8 @@ public class Cliente {
     // Definindo campos
     private int id;
     private String nome;
+
+    @JsonAdapter(AdaptadorCPF.class)
     private String cpf;
     private List<Compra> compras = new ArrayList<>();
     private float totalCompras = 0.0f; // TODO: essa variável é realmente necessária? Alterar o getter dela para iterar pela variável compras não é melhor?

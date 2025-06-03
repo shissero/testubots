@@ -115,6 +115,8 @@ public class Vinho {
         return SSN;
     }
 
+    float obterPreco() { return preco; }
+
     public boolean equals(Vinho vinho) { // Esse método é necessário ao extrair os dados dos arquivos json. Nesses arquivos, os vinhos não vêm com uma informação específica que os identifique.
 
         return this.produto.equals(vinho.produto) && // Se for incluir o código do produto nesta comparação, alter o método IRepositórioVinhos.buscarVinhoPorVinho, pois este espera que o método equals ignore o campo Vinho.código

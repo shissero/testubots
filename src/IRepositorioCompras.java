@@ -66,6 +66,11 @@ public class IRepositorioCompras {
         }
     }
 
+    public float obterTotalComprasPorCliente(Cliente cliente) {
+
+        return todasAsCompras.stream().filter( x -> x.obterCliente() == cliente).reduce(0.0f, (subtotal, elemento) -> subtotal + elemento.obterValorTotal(), Float::sum);
+    }
+
 
     // Definindo campos
     private List<Compra> todasAsCompras = new ArrayList<>();

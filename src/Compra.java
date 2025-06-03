@@ -65,6 +65,7 @@ public class Compra {
     }
 
     public float obterValorTotal() {
-        return valorTotal;
+
+        return itens.stream().reduce(0.0f, (subtotal, elemento) -> subtotal + elemento.obterPreco(), Float::sum);
     }
 }

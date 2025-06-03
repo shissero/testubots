@@ -52,6 +52,11 @@ public class IRepositorioClientes {
         return todosOsClientes.stream().filter(x -> x.obterCPF().equals(cpf)).findFirst();
     }
 
+    public List<Cliente> obterTodosClientes(){
+
+        return todosOsClientes;
+    }
+
     void atualizar(Cliente cli_novo) {
 /*
         Optional<Cliente> cliente = buscarPorId(cli_novo.obterID());

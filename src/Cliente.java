@@ -68,7 +68,8 @@ public class Cliente {
     }
 
     public float obterTotalCompras() {
-        return totalCompras;
+
+        return compras.stream().reduce(0.0f, (subtotal, element) -> subtotal + (element.obterValorTotal()), Float::sum);
     }
 
     public List<Vinho> obterVinhosComprados() {

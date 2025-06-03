@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 public class IRepositorioCompras {
 
-    public void carregarTodasCompras(IRepositorioClientes repClientes) {
+    public void carregarTodasCompras(IRepositorioClientes repClientes, IRepositorioVinhos repVinhos) {
 
         String arquivo_compras = "res/compras_historico";
 
@@ -28,7 +28,7 @@ public class IRepositorioCompras {
 
             reader.close();
 
-            Gson gson = new GsonBuilder()
+            Gson gson = new GsonBuilder() // TODO: transforme esses TypeAdapters em classes
                     .registerTypeAdapter(LocalDate.class, (JsonDeserializer<LocalDate>) (json, type, jsonDeserializationContext) -> {
 
                 try {
@@ -48,7 +48,7 @@ public class IRepositorioCompras {
                                             )
                                     )
                                     .get()
-                    )
+                    ).registerTypeAdapter(Vinho.class, new JSONDeserializerVinho(repVinhos))
                     .create();
 
             TypeToken<List<Compra>> collectionType = new TypeToken<>() {

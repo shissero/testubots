@@ -12,7 +12,11 @@ public class Compra {
     private String codigo;
     private LocalDate data;
     private Cliente cliente;
-    private List<Vinho> vinhos = new ArrayList<>();
+
+    // TODO: Esse nome é provisório, apenas enquanto não domino melhor a Gson
+    // Nomear esse item como "vinhos" vai criar problemas na hora da desserialização
+    //@JsonAdapter(JSONDeserializerVinho.class)
+    private List<Vinho> itens = new ArrayList<>();
     private float valorTotal = 0;
 
 
@@ -38,7 +42,7 @@ public class Compra {
     }
 
     public void adicionarVinho(Vinho vinho) {
-        vinhos.add(vinho);
+        itens.add(vinho);
     }
 
 
@@ -57,7 +61,7 @@ public class Compra {
     }
 
     public List<Vinho> obterVinhos() {
-        return vinhos;
+        return itens;
     }
 
     public float obterValorTotal() {

@@ -12,7 +12,7 @@ public class Iniciar { // TODO: é necessário documentar o código
         var repositorioCompras = new IRepositorioCompras();
 
         repositorioClientes.carregarTodosClientes();
-        repositorioCompras.carregarTodasCompras(repositorioClientes);
+        repositorioCompras.carregarTodasCompras(repositorioClientes, repositorioVinhos);
 
         Historico.construir();
 

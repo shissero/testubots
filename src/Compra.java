@@ -1,3 +1,5 @@
+import com.google.gson.annotations.JsonAdapter;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -10,8 +12,10 @@ public class Compra {
 
     // Definindo campos
     private String codigo;
+
+    @JsonAdapter(JSONDeserializerLocalDate.class)
     private LocalDate data;
-    private Cliente cliente;
+    private transient Cliente cliente;
 
     // TODO: Esse nome é provisório, apenas enquanto não domino melhor a Gson
     // Nomear esse item como "vinhos" vai criar problemas na hora da desserialização

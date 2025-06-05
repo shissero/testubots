@@ -62,7 +62,7 @@ public class Iniciar { // TODO: é necessário documentar o código
     static void opcao1(){
 
         List<Cliente> clientes = repositorioClientes.obterTodosClientes().stream().sorted(
-                                                                                    Comparator.comparingDouble(Cliente::obterTotalCompras)
+                                                                                    Comparator.comparingDouble(Cliente::obterTotalCompras).reversed()
                                                                                     ).collect(Collectors.toList());
 
         for(Cliente cliente : clientes){

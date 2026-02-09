@@ -16,9 +16,9 @@ public class JSONDeserializerCompra implements JsonDeserializer<Compra> {
      * Um repositório onde procurar os clientes
      *
      */
-    private IRepositorioClientes repositorio;
+    private IRepositorio repositorio;
 
-    JSONDeserializerCompra(IRepositorioClientes repositorio) {
+    JSONDeserializerCompra(IRepositorio repositorio) {
 
         this.repositorio = repositorio;
     }

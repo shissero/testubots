@@ -6,13 +6,13 @@ import java.util.stream.Collectors;
 public class Iniciar { // TODO: é necessário documentar o código
                         // TODO: é necessário mudar o read.me para refletir a nova implementação do projeto
 
-    public static IRepositorioClientes repositorioClientes;
+    public static IRepositorio repositorioClientes;
     public static IRepositorioCompras repositorioCompras;
     public static IRepositorioVinhos repositorioVinhos;
 
     public static void main(String[] args){
 
-        repositorioClientes = new IRepositorioClientes();
+        repositorioClientes = new IRepositorio();
         repositorioVinhos = new IRepositorioVinhos();
         repositorioCompras = new IRepositorioCompras();
 

@@ -1,11 +1,11 @@
 import org.junit.jupiter.api.Test;
 
-class IRepositorioClientesTest {
+class IRepositorioTest {
 
     @Test
     void atualizar() {
 
-        IRepositorioClientes rep = new IRepositorioClientes();
+        IRepositorio rep = new IRepositorio();
 
         rep.carregarTodosClientes();
 
@@ -21,7 +21,7 @@ class IRepositorioClientesTest {
     @Test
     void obterTodosClientes() {
 
-        IRepositorioClientes rep = new IRepositorioClientes();
+        IRepositorio rep = new IRepositorio();
 
         rep.carregarTodosClientes();
 
@@ -35,7 +35,7 @@ class IRepositorioClientesTest {
     @Test
     void remover() {
 
-        IRepositorioClientes rep = new IRepositorioClientes();
+        IRepositorio rep = new IRepositorio();
 
         rep.carregarTodosClientes();
 

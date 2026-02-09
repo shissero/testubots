@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class IRepositorioCompras {
 
-    public void carregarTodasCompras(IRepositorioClientes repClientes, IRepositorioVinhos repVinhos) {
+    public void carregarTodasCompras(IRepositorio repClientes, IRepositorioVinhos repVinhos) {
 
         String arquivo_compras = "res/compras_historico";
 

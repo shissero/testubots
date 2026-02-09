@@ -15,7 +15,7 @@ public class IRepositorioClientes {
     /**
      * Esta função carrega na memória todos os clientes.
      */
-     // Esta implementação é provisória, pretendo integrar com o MySQL assim que instalar mais armazenamento interno na minha máquina
+    // Esta implementação é provisória, pretendo integrar com o MySQL assim que instalar mais armazenamento interno na minha máquina
     public void carregarTodosClientes() {
 
         String arquivo_clientes = "res/clientes";
@@ -51,6 +51,20 @@ public class IRepositorioClientes {
     public Optional<Cliente> buscarPorCPF(String cpf) {
 
         Optional<Cliente> resultado = todosOsClientes.stream().filter(x -> x.obterCPF().equals(cpf)).findFirst();
+
+        if (resultado.isPresent()) {
+
+            Cliente cliente = resultado.get();
+
+            return Optional.of(new Cliente(cliente));
+        }
+
+        return Optional.empty();
+    }
+
+    public Optional<Cliente> buscarPorId(UUID id) {
+
+        Optional<Cliente> resultado = todosOsClientes.stream().filter(el -> el.obterID() == id).findFirst();
 
         if (resultado.isPresent()) {
 

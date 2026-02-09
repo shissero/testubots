@@ -16,13 +16,23 @@ public class Compra {
 
     @JsonAdapter(JSONDeserializerLocalDate.class)
     private LocalDate data;
-    private transient Cliente cliente;
+    private UUID cliente;
 
     // TODO: Esse nome é provisório, apenas enquanto não domino melhor a Gson
     // Nomear esse item como "vinhos" vai criar problemas na hora da desserialização
     //@JsonAdapter(JSONDeserializerVinho.class)
     private List<Vinho> itens = new ArrayList<>();
     private float valorTotal = 0;
+
+    Compra(){}
+
+    Compra(Compra compra){
+
+        this.codigo = compra.codigo;
+        this.data = compra.data;
+        this.cliente = compra.cliente;
+        this.itens = new ArrayList<>(compra.itens);
+    }
 
 
 
@@ -38,7 +48,7 @@ public class Compra {
         this.data = LocalDate.parse(data, formato);
     }
 
-    public void definirCliente(Cliente cliente) {
+    public void definirCliente(UUID cliente) {
         this.cliente = cliente;
     }
 
@@ -53,7 +63,7 @@ public class Compra {
 
 
     // Definindo getters
-    public Cliente obterCliente() {
+    public UUID obterCliente() {
         return cliente;
     }
 

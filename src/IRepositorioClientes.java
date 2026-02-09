@@ -50,7 +50,16 @@ public class IRepositorioClientes {
 
     public Optional<Cliente> buscarPorCPF(String cpf) {
 
-        return todosOsClientes.stream().filter(x -> x.obterCPF().equals(cpf)).findFirst();
+        Optional<Cliente> resultado = todosOsClientes.stream().filter(x -> x.obterCPF().equals(cpf)).findFirst();
+
+        if (resultado.isPresent()) {
+
+            Cliente cliente = resultado.get();
+
+            return Optional.of(new Cliente(cliente));
+        }
+
+        return Optional.empty();
     }
 
     public List<Cliente> obterTodosClientes(){

@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
  * Esta classe representa a interface para os repositórios da classe Cliente.
  * Os métodos estão sendo implementados nela somente para facilitar a refatoração mais tarde.
  */
-public class IRepositorio {
+public class IRepositorio { // TODO: testar as funções de busca de cliente
 
 
     List<Vinho> todosVinhos = new ArrayList<>();

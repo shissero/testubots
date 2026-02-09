@@ -118,6 +118,13 @@ public class IRepositorio { // TODO: testar as funções de busca de cliente
         if(resultado) todosVinhos.add(vinho_novo);
     }
 
+    void atualizar(Compra compra_nova){
+
+        boolean resultado = todasAsCompras.removeIf(el -> el.obterCodigo().equals(compra_nova.obterCodigo()));
+
+        if(resultado) todasAsCompras.add(compra_nova);
+    }
+
     void removerCliente(UUID id) {
 
         todosOsClientes.removeIf(el -> el.obterID().equals(id));

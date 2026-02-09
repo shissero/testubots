@@ -206,4 +206,28 @@ class IRepositorioTest {
 
         return;
     }
+
+    @Test
+    void atualizarCompra() {
+
+        String id = "3fde36a6-c9a1-4d27-9f0f-7c12ab0d1cdd";
+
+        IRepositorio repositorio = new IRepositorio();
+
+        Compra compra = new Compra();
+
+        compra.definirCodigo(UUID.fromString(id));
+
+        repositorio.adicionarCompra(compra);
+
+        Compra novo = new Compra(compra);
+
+        novo.definirCodigo(UUID.fromString(id));
+
+        novo.definirValorTotal(54f);
+
+        repositorio.atualizar(novo);
+
+        return;
+    }
 }

@@ -57,7 +57,7 @@ public class IRepositorio { // TODO: testar as funções de busca de cliente
 
     public Optional<Cliente> buscarClientePorCPF(String cpf) {
 
-        Optional<Cliente> resultado = todosOsClientes.stream().filter(x -> x.obterCPF().equals(cpf)).findFirst();
+        Optional<Cliente> resultado = todosOsClientes.stream().filter(el -> el.obterCPF().equals(cpf)).findFirst();
 
         if (resultado.isPresent()) {
 

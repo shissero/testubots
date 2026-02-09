@@ -44,7 +44,7 @@ public class Cliente {
 
     public void definirCPF(String cpf) {
 
-        this.cpf = validarCPF(cpf);
+        this.cpf = cpf;
     }
 
     public void adicionarCompra(Compra compra) {

@@ -47,7 +47,6 @@ public class IRepositorio {
 
     public void adicionarCliente(Cliente cliente) {
 
-        cliente.definirID(UUID.randomUUID());
         todosOsClientes.add(cliente);
     }
 

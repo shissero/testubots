@@ -23,6 +23,7 @@ public class Compra {
     //@JsonAdapter(JSONDeserializerVinho.class)
     private List<Vinho> itens = new ArrayList<>();
 
+    // Definindo construtores
     Compra(){}
 
     Compra(Compra compra){

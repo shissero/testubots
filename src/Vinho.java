@@ -16,6 +16,7 @@ public class Vinho {
     private int safra;
     private float preco;
 
+    // Definindo construtores
     Vinho(){}
 
     Vinho(Vinho vinho){

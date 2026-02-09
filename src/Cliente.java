@@ -15,6 +15,7 @@ public class Cliente {
     @JsonAdapter(AdaptadorCPF.class)
     private String cpf;
 
+    // Definindo construtores
     Cliente(){}
 
     Cliente(Cliente cliente){
@@ -27,10 +28,12 @@ public class Cliente {
 
     // Definindo setters
     public void definirID(UUID id) {
+
         this.id = id;
     }
 
     public void definirNome(String nome) {
+
         this.nome = nome;
     }
 

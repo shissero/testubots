@@ -140,6 +140,4 @@ public class IRepositorio { // TODO: testar as funções de busca de cliente
         todasAsCompras.removeIf(el -> el.obterCodigo().equals(id));
     }
 
-    // Definindo campos
-    private List<Cliente> todosOsClientes = new ArrayList<>();
 }

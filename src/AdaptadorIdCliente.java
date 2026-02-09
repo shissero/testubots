@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 public class AdaptadorIdCliente extends TypeAdapter<UUID> {
+
     @Override
     public void write(JsonWriter jsonWriter, UUID uuid) throws IOException {
 

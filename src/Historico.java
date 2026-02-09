@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 // TODO: essa classe é um repositório, deve ser refatorada
@@ -11,8 +10,7 @@ import java.util.List;
 public class Historico {
 
     private static List<Compra> todasAsCompras = new ArrayList<>();
-    private static List<Cliente> todosOsClientes = new ArrayList<>();
-    private static List<Item> todosOsItens = new ArrayList<>();
+    private static List<Vinho> todosOsVinhos = new ArrayList<>();
 
 
     private Historico() {
@@ -41,7 +39,7 @@ public class Historico {
      * Carrega os dados das compras na memória
      */
     private static void armazenarCompras() {
-        try {
+        /*try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader("res/compras_historico"));
 
             String linha = bufferedReader.readLine();
@@ -50,7 +48,7 @@ public class Historico {
             do {
 
                 Compra compra = new Compra();
-                Item item = new Item();
+                Vinho vinho = new Vinho();
 
                 linha = bufferedReader.readLine();
                 compra.definirCodigo(extrairInformacao(linha, 3));
@@ -69,28 +67,28 @@ public class Historico {
                     linha = bufferedReader.readLine();
 
                     if (linha.contains("codigo")) {
-                        item.definirCodigo(extrairInformacao(linha, 3));
+                        vinho.definirCodigo(extrairInformacao(linha, 3));
                         linha = bufferedReader.readLine();
                     }
 
-                    item.definirProduto(extrairInformacao(linha, 3));
+                    vinho.definirProduto(extrairInformacao(linha, 3));
 
                     linha = bufferedReader.readLine();
-                    item.definirVariedade(extrairInformacao(linha, 3));
+                    vinho.definirVariedade(extrairInformacao(linha, 3));
 
                     linha = bufferedReader.readLine();
-                    item.definirPais(extrairInformacao(linha, 3));
+                    vinho.definirPais(extrairInformacao(linha, 3));
 
                     linha = bufferedReader.readLine();
-                    item.definirCategoria(extrairInformacao(linha, 3));
+                    vinho.definirCategoria(extrairInformacao(linha, 3));
 
                     linha = bufferedReader.readLine();
-                    item.definirSafra(Integer.parseInt(extrairInformacao(linha, 3)));
+                    vinho.definirSafra(Integer.parseInt(extrairInformacao(linha, 3)));
 
                     linha = bufferedReader.readLine();
-                    item.definirPreco(Float.parseFloat(extrairInformacao(linha, 2).substring(2)));
+                    vinho.definirPreco(Float.parseFloat(extrairInformacao(linha, 2).substring(2)));
 
-                    compra.adicionarItem(item);
+                    compra.adicionarVinho(vinho);
 
                     linha = bufferedReader.readLine(); // Lê a chave que encerra a descrição de um item
                     linha = bufferedReader.readLine(); // Lê a chave que inicia a descrição do próximo item ou o colchete que finaliza a lista de itens da compra atual
@@ -101,8 +99,8 @@ public class Historico {
 
                 todasAsCompras.add(compra);
 
-                for (Cliente a : todosOsClientes)
-                    if (compra.obterCliente().obterID() == (a.obterID())) a.adicionarCompra(compra);
+                //for (Cliente a : todosOsClientes)
+                  //  if (compra.obterCliente().obterID() == (a.obterID())) a.adicionarCompra(compra);
 
                 linha = bufferedReader.readLine(); // Lê a chave que finaliza a descrição de uma compra
                 linha = bufferedReader.readLine(); // Lê a chave que finaliza inicia a descrição da próxima compra, ou que finaliza o histórico
@@ -111,7 +109,7 @@ public class Historico {
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     /**
@@ -133,7 +131,7 @@ public class Historico {
 
                 linha = bufferedReader.readLine();
                 linha = extrairInformacao(linha, 2);
-                cliente.definirID(Integer.parseInt(linha.substring(2, linha.length() - 1)));
+                //cliente.definirID(Integer.parseInt(linha.substring(2, linha.length() - 1)));
 
                 linha = bufferedReader.readLine();
                 cliente.definirNome(extrairInformacao(linha, 3));
@@ -141,7 +139,7 @@ public class Historico {
                 linha = bufferedReader.readLine();
                 cliente.definirCPF(extrairInformacao(linha, 3));
 
-                todosOsClientes.add(cliente);
+                //todosOsClientes.add(cliente);
 
                 bufferedReader.readLine(); // Descarta-se a chave que finaliza a descrição do cliente
 
@@ -159,8 +157,8 @@ public class Historico {
     private static void armazenarItens() {
 
         for (Compra a : todasAsCompras) {
-            for (Item b : a.obterItens()) {
-                if (!Conjunto.pertence(b, todosOsItens)) todosOsItens.add(b);
+            for (Vinho b : a.obterVinhos()) {
+                if (!Conjunto.pertence(b, todosOsVinhos)) todosOsVinhos.add(b);
             }
         }
     }
@@ -177,19 +175,20 @@ public class Historico {
      */
     private static void calcularTotais() {
         for (Compra a : todasAsCompras) {
-            for (Cliente b : todosOsClientes) {
-                if (a.obterCliente().obterCPF().equals(b.obterCPF())) {
-                    b.incrementarValorTotal(a.obterValorTotal());
-                    break;
-                }
-            }
+            //for (Cliente b : todosOsClientes) {
+              //  if (a.obterCliente().obterCPF().equals(b.obterCPF())) {
+                //    b.incrementarValorTotal(a.obterValorTotal());
+                  //  break;
+                //}
+            //}
         }
     }
 
     public static List<Cliente> obterClientesPorTotal() {
-        Ordenacao.ordenarPorTotal(0, todosOsClientes.size() - 1);
+        //Ordenacao.ordenarPorTotal(0, todosOsClientes.size() - 1);
 
-        return todosOsClientes;
+        //return todosOsClientes;
+        return null;
     }
 
     static class Ordenacao {
@@ -207,18 +206,18 @@ public class Historico {
 
         static int particionar(int inicio, int fim) {
 
-            float pivot = todosOsClientes.get(fim).obterTotalCompras();
+            //float pivot = todosOsClientes.get(fim).obterTotalCompras();
             int i = inicio - 1;
 
             for (int j = inicio; j <= fim - 1; j++) {
-                if (todosOsClientes.get(j).obterTotalCompras() >= pivot) {
+              //  if (todosOsClientes.get(j).obterTotalCompras() >= pivot) {
                     i++;
 
-                    Collections.swap(todosOsClientes, i, j);
-                }
+                //    Collections.swap(todosOsClientes, i, j);
+                //}
             }
 
-            Collections.swap(todosOsClientes, i + 1, fim);
+            //Collections.swap(todosOsClientes, i + 1, fim);
 
             return i + 1;
         }
@@ -249,7 +248,7 @@ public class Historico {
     public static List<Cliente> obterClientesMaisFieis() {
         List<Cliente> clientesFieis = new ArrayList<>();
 
-        for (Cliente a : todosOsClientes) {
+        /*for (Cliente a : todosOsClientes) {
             if (clientesFieis.isEmpty()) clientesFieis.add(a);
             else {
                 for (Cliente b : clientesFieis) {
@@ -264,7 +263,7 @@ public class Historico {
 
                 if (clientesFieis.size() > 3) clientesFieis.remove(clientesFieis.size() - 1);
             }
-        }
+        }*/
 
         return clientesFieis;
     }
@@ -274,7 +273,7 @@ public class Historico {
         String str = Cliente.validarCPF(cpf);
 
 
-        for (Cliente a : todosOsClientes) if (a.obterCPF().equals(str)) return a;
+        //for (Cliente a : todosOsClientes) if (a.obterCPF().equals(str)) return a;
 
         System.out.println("CPF " + str + " não encontrado");
         return null;
@@ -286,7 +285,7 @@ public class Historico {
      */
     static void finalizarClientes() {
 
-        for (Cliente a : todosOsClientes) {
+        /*for (Cliente a : todosOsClientes) {
 
             for (Compra b : a.obterHistorico()) {
 
@@ -297,7 +296,7 @@ public class Historico {
 
             for (Item d : todosOsItens)
                 if (!Conjunto.pertence(d, a.obterVinhosComprados())) a.adicionarVinhoNaoComprado(d);
-        }
+        }*/
     }
 
     /**
@@ -306,17 +305,17 @@ public class Historico {
      */
     static void finalizarItens() {
 
-        for (Item a : todosOsItens) {
+        for (Vinho a : todosOsVinhos) {
 
-            for (Cliente b : todosOsClientes) {
+            /*for (Cliente b : todosOsClientes) {
                 if (Conjunto.pertence(a, b.obterVinhosComprados())) a.adicionarComprador(b);
                 else a.adicionarNaoComprador(b);
-            }
+            }*/
 
         }
     }
 
-    public static List<Item> obterTodosOsItens() {
-        return todosOsItens;
+    public static List<Vinho> obterTodosOsItens() {
+        return todosOsVinhos;
     }
 }

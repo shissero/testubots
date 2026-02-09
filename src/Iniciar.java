@@ -1,10 +1,22 @@
+import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
-public class Iniciar {
+public class Iniciar { // TODO: é necessário documentar o código
+                        // TODO: é necessário mudar o read.me para refletir a nova implementação do projeto
+
+    public static IRepositorio repositorioClientes;
+    public static IRepositorioCompras repositorioCompras;
 
     public static void main(String[] args){
 
-        Historico.construir();
+        repositorioClientes = new IRepositorio();
+        repositorioCompras = new IRepositorioCompras();
+
+        repositorioClientes.carregarTodosClientes();
+
+        //Historico.construir();
 
         externo: // TODO: é realmente necessário esse rótulo? Acho que dá para refazer esse código sem isso
         do {
@@ -47,9 +59,13 @@ public class Iniciar {
 
     static void opcao1(){
 
-        for(Cliente a : Historico.obterClientesPorTotal()){
+        List<Cliente> clientes = repositorioClientes.obterTodosClientes().stream().sorted(
+                                                                                    Comparator.comparingDouble(Cliente::obterTotalCompras).reversed()
+                                                                                    ).collect(Collectors.toList());
 
-            System.out.println(a.obterNome() + " (id: " + a.obterID() + ") --> R$ " + a.obterTotalCompras());
+        for(Cliente cliente : clientes){
+
+            System.out.println(cliente.obterNome() + " (id: " + cliente.obterID() + ") --> R$ " + cliente.obterTotalCompras());
         }
 
         System.out.print("\n\n\n");
@@ -114,15 +130,15 @@ public class Iniciar {
                 System.out.println("Nenhum cliente encontrado");
             }
             else{
-                Item item = cliente.sugerirVinho();
-                if(item == null) System.out.println("Nada para recomendar");
+                Vinho vinho = cliente.sugerirVinho();
+                if(vinho == null) System.out.println("Nada para recomendar");
                 else {
-                    System.out.println(item.obterProduto() + ", " +
-                            item.obterVariedade() + ", " +
-                            item.obterVariedade() + ", " +
-                            item.obterPais() + ", " +
-                            item.obterCategoria() + ", " +
-                            item.obterSafra() + ".\n");
+                    System.out.println(vinho.obterProduto() + ", " +
+                            vinho.obterVariedade() + ", " +
+                            vinho.obterVariedade() + ", " +
+                            vinho.obterPais() + ", " +
+                            vinho.obterCategoria() + ", " +
+                            vinho.obterSafra() + ".\n");
                 }
             }
 

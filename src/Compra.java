@@ -1,9 +1,10 @@
+import com.google.gson.annotations.JsonAdapter;
+
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Classe de dados para representar compras
@@ -11,16 +12,32 @@ import java.util.List;
 public class Compra {
 
     // Definindo campos
-    private String codigo;
-    private ZonedDateTime data;
-    private Cliente cliente;
-    private List<Item> itens = new ArrayList<>();
+    private UUID codigo;
+
+    @JsonAdapter(JSONDeserializerLocalDate.class)
+    private LocalDate data;
+    private UUID cliente;
+
+    // TODO: Esse nome é provisório, apenas enquanto não domino melhor a Gson
+    // Nomear esse item como "vinhos" vai criar problemas na hora da desserialização
+    //@JsonAdapter(JSONDeserializerVinho.class)
+    private List<Vinho> itens = new ArrayList<>();
     private float valorTotal = 0;
+
+    Compra(){}
+
+    Compra(Compra compra){
+
+        this.codigo = compra.codigo;
+        this.data = compra.data;
+        this.cliente = compra.cliente;
+        this.itens = new ArrayList<>(compra.itens);
+    }
 
 
 
     // Definindo setters
-    public void definirCodigo(String codigo) {
+    public void definirCodigo(UUID codigo) {
         this.codigo = codigo;
     }
 
@@ -28,12 +45,10 @@ public class Compra {
 
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy"); // TODO: que tal criar uma classe para cuidar da validação desses dados e passar um objeto LocalDate para o setter?
 
-        LocalDate date = LocalDate.parse(data, formato);
-
-        this.data = date.atStartOfDay(ZoneId.systemDefault());
+        this.data = LocalDate.parse(data, formato);
     }
 
-    public void definirCliente(Cliente cliente) {
+    public void definirCliente(UUID cliente) {
         this.cliente = cliente;
     }
 
@@ -41,30 +56,31 @@ public class Compra {
         this.valorTotal = valor;
     }
 
-    public void adicionarItem(Item item) {
-        itens.add(item);
+    public void adicionarVinho(Vinho vinho) {
+        itens.add(vinho);
     }
 
 
 
     // Definindo getters
-    public Cliente obterCliente() {
+    public UUID obterCliente() {
         return cliente;
     }
 
-    public String obterCodigo() {
+    public UUID obterCodigo() {
         return codigo;
     }
 
-    public ZonedDateTime obterData() {
+    public LocalDate obterData() {
         return data;
     }
 
-    public List<Item> obterItens() {
+    public List<Vinho> obterVinhos() {
         return itens;
     }
 
     public float obterValorTotal() {
-        return valorTotal;
+
+        return itens.stream().reduce(0.0f, (subtotal, elemento) -> subtotal + elemento.obterPreco(), Float::sum);
     }
 }

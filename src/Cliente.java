@@ -1,5 +1,8 @@
+import com.google.gson.annotations.JsonAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static java.lang.System.*;
 
@@ -9,17 +12,29 @@ import static java.lang.System.*;
 public class Cliente {
 
     // Definindo campos
-    private int id;
+    @JsonAdapter(AdaptadorIdCliente.class)
+    private UUID id;
     private String nome;
+
+    @JsonAdapter(AdaptadorCPF.class)
     private String cpf;
     private List<Compra> compras = new ArrayList<>();
     private float totalCompras = 0.0f; // TODO: essa variável é realmente necessária? Alterar o getter dela para iterar pela variável compras não é melhor?
-    private List<Item> vinhosComprados = new ArrayList<>();
-    private List<Item> vinhosNaoComprados = new ArrayList<>();
+    private List<Vinho> vinhosComprados = new ArrayList<>();
+    private List<Vinho> vinhosNaoComprados = new ArrayList<>();
+
+    Cliente(){}
+
+    Cliente(Cliente cliente){
+
+        this.id = cliente.id;
+        this.nome = cliente.nome;
+        this.cpf = cliente.cpf;
+    }
 
 
     // Definindo setters
-    public void definirID(int id) {
+    public void definirID(UUID id) {
         this.id = id;
     }
 
@@ -29,7 +44,7 @@ public class Cliente {
 
     public void definirCPF(String cpf) {
 
-        this.cpf = validarCPF(cpf);
+        this.cpf = cpf;
     }
 
     public void adicionarCompra(Compra compra) {
@@ -37,17 +52,17 @@ public class Cliente {
         compras.add(compra);
     }
 
-    public void adicionarVinhoComprado(Item vinho) {
+    public void adicionarVinhoComprado(Vinho vinho) {
         vinhosComprados.add(vinho);
     }
 
-    public void adicionarVinhoNaoComprado(Item vinho) {
+    public void adicionarVinhoNaoComprado(Vinho vinho) {
         vinhosNaoComprados.add(vinho);
     }
 
 
     // Definindo getters
-    public int obterID() {
+    public UUID obterID() {
         return id;
     }
 
@@ -64,10 +79,11 @@ public class Cliente {
     }
 
     public float obterTotalCompras() {
-        return totalCompras;
+
+        return compras.stream().reduce(0.0f, (subtotal, element) -> subtotal + (element.obterValorTotal()), Float::sum);
     }
 
-    public List<Item> obterVinhosComprados() {
+    public List<Vinho> obterVinhosComprados() {
         return vinhosComprados;
     }
 
@@ -83,9 +99,9 @@ public class Cliente {
 
 
 
-    public Item sugerirVinho() { // TODO: isso podia ser um getter - obterSugestao
+    public Vinho sugerirVinho() { // TODO: isso podia ser um getter - obterSugestao
 
-        Item item = null;
+        Vinho vinho = null;
 
         // Estas duas variáveis armazenam, respectivamente, a soma das similaridades entre todos os clientes
         // que compraram o vinho e a soma das similaridades entre todos os clientes que nao compraram o vinho
@@ -93,7 +109,7 @@ public class Cliente {
         float probabilidade = -1.0f, probAux;
 
 
-        for (Item a : Historico.obterTodosOsItens()) {
+        for (Vinho a : Historico.obterTodosOsItens()) {
 
             List<Cliente> compradores = a.obterCompradores();
             List<Cliente> naoCompradores = a.obterNaoCompradores();
@@ -105,11 +121,11 @@ public class Cliente {
 
             if (probAux >= probabilidade) {
                 probabilidade = probAux;
-                item = a;
+                vinho = a;
             }
         }
 
-        return item == null ? this.vinhosComprados.get(0) : item;
+        return vinho == null ? this.vinhosComprados.get(0) : vinho;
     }
 
     public float similaridade(Cliente cliente) { // TODO: podia ser um getter
@@ -134,5 +150,11 @@ public class Cliente {
             str = str.replace("-", "");
             return str;
         }
+    }
+
+    @Override
+    public Cliente clone() throws CloneNotSupportedException {
+
+        return (Cliente) super.clone();
     }
 }

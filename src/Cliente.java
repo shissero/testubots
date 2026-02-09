@@ -24,6 +24,15 @@ public class Cliente {
     private List<Vinho> vinhosComprados = new ArrayList<>();
     private List<Vinho> vinhosNaoComprados = new ArrayList<>();
 
+    Cliente(){}
+
+    Cliente(Cliente cliente){
+
+        this.id = cliente.id;
+        this.nome = cliente.nome;
+        this.cpf = cliente.cpf;
+    }
+
 
     // Definindo setters
     public void definirID(UUID id) {
@@ -142,5 +151,11 @@ public class Cliente {
             str = str.replace("-", "");
             return str;
         }
+    }
+
+    @Override
+    public Cliente clone() throws CloneNotSupportedException {
+
+        return (Cliente) super.clone();
     }
 }

@@ -44,7 +44,7 @@ class IRepositorioTest {
 
         Cliente cliente = rep.obterTodosClientes().get(0);
 
-        rep.remover(cliente.obterID());
+        rep.removerCliente(cliente.obterID());
 
         return;
     }
@@ -95,6 +95,28 @@ class IRepositorioTest {
         vinho2.definirVariedade("Rose");
 
         repositorio.atualizar(vinho2);
+
+        return;
+    }
+
+    @Test
+    void removerVinho() {
+
+        String codigo = "3fde36a6-c9a1-4d27-9f0f-7c12ab0d1cdd";
+
+        IRepositorio repositorio = new IRepositorio();
+
+        Vinho vinho1 = new Vinho();
+
+        vinho1.definirCodigo(UUID.fromString(codigo));
+
+        vinho1.definirVariedade("Cabernet");
+
+        vinho1.definirCategoria("Tinto");
+
+        repositorio.adicionarVinho(vinho1);
+
+        repositorio.removerVinho(UUID.fromString(codigo));
 
         return;
     }

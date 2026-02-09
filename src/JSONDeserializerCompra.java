@@ -28,7 +28,7 @@ public class JSONDeserializerCompra implements JsonDeserializer<Compra> {
 
         Compra compra = (new Gson()).fromJson(jsonElement, Compra.class);
 
-        Optional<Cliente> resultado = repositorio.buscarPorCPF(AdaptadorCPF.removerSeparadores(jsonElement.getAsJsonObject().get("cliente").getAsString()));
+        Optional<Cliente> resultado = repositorio.buscarClientePorCPF(AdaptadorCPF.removerSeparadores(jsonElement.getAsJsonObject().get("cliente").getAsString()));
 
         if (resultado.isPresent()) {
 

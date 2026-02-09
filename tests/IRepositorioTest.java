@@ -70,4 +70,32 @@ class IRepositorioTest {
 
         return;
     }
+
+    @Test
+    void testAtualizarVinho() {
+
+        IRepositorio repositorio = new IRepositorio();
+
+        Vinho vinho1 = new Vinho();
+
+        Vinho vinho2;
+
+        UUID codigo = UUID.randomUUID();
+
+        vinho1.definirCodigo(codigo);
+
+        vinho1.definirVariedade("Cabernet");
+
+        vinho1.definirCategoria("Tinto");
+
+        repositorio.adicionarVinho(vinho1);
+
+        vinho2 = new Vinho(vinho1);
+
+        vinho2.definirVariedade("Rose");
+
+        repositorio.atualizar(vinho2);
+
+        return;
+    }
 }

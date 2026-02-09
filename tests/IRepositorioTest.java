@@ -120,4 +120,42 @@ class IRepositorioTest {
 
         return;
     }
+
+    @Test
+    void buscarClientePorCPF() {
+
+        IRepositorio repositorio = new IRepositorio();
+
+        String cpf1 = "00000000001";
+
+        String cpf2 = "00000000001";
+
+        Cliente cliente = new Cliente();
+
+        cliente.definirCPF(cpf1);
+
+        repositorio.adicionarCliente(cliente);
+
+        Optional<Cliente> resultado = repositorio.buscarClientePorCPF(cpf2);
+
+        return;
+    }
+
+    @Test
+    void buscarClientePorId() {
+
+        IRepositorio repositorio = new IRepositorio();
+
+        String codigo = "3fde36a6-c9a1-4d27-9f0f-7c12ab0d1cdd";
+
+        Cliente cliente = new Cliente();
+
+        cliente.definirID(UUID.fromString(codigo));
+
+        repositorio.adicionarCliente(cliente);
+
+        Optional<Cliente> resultado = repositorio.buscarClientePorId(UUID.fromString(codigo));
+
+        return;
+    }
 }

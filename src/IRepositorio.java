@@ -71,7 +71,7 @@ public class IRepositorio { // TODO: testar as funções de busca de cliente
 
     public Optional<Cliente> buscarClientePorId(UUID id) {
 
-        Optional<Cliente> resultado = todosOsClientes.stream().filter(el -> el.obterID() == id).findFirst();
+        Optional<Cliente> resultado = todosOsClientes.stream().filter(el -> el.obterID().equals(id)).findFirst();
 
         if (resultado.isPresent()) {
 

@@ -1,7 +1,9 @@
+import classes_de_dados.AdaptadorIdCliente;
 import com.google.gson.annotations.JsonAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static java.lang.System.*;
 
@@ -11,7 +13,8 @@ import static java.lang.System.*;
 public class Cliente {
 
     // Definindo campos
-    private int id;
+    @JsonAdapter(AdaptadorIdCliente.class)
+    private UUID id;
     private String nome;
 
     @JsonAdapter(AdaptadorCPF.class)
@@ -21,9 +24,18 @@ public class Cliente {
     private List<Vinho> vinhosComprados = new ArrayList<>();
     private List<Vinho> vinhosNaoComprados = new ArrayList<>();
 
+    Cliente(){}
+
+    Cliente(Cliente cliente){
+
+        this.id = cliente.id;
+        this.nome = cliente.nome;
+        this.cpf = cliente.cpf;
+    }
+
 
     // Definindo setters
-    public void definirID(int id) {
+    public void definirID(UUID id) {
         this.id = id;
     }
 
@@ -51,7 +63,7 @@ public class Cliente {
 
 
     // Definindo getters
-    public int obterID() {
+    public UUID obterID() {
         return id;
     }
 
@@ -68,7 +80,8 @@ public class Cliente {
     }
 
     public float obterTotalCompras() {
-        return totalCompras;
+
+        return compras.stream().reduce(0.0f, (subtotal, element) -> subtotal + (element.obterValorTotal()), Float::sum);
     }
 
     public List<Vinho> obterVinhosComprados() {
@@ -138,5 +151,11 @@ public class Cliente {
             str = str.replace("-", "");
             return str;
         }
+    }
+
+    @Override
+    public Cliente clone() throws CloneNotSupportedException {
+
+        return (Cliente) super.clone();
     }
 }

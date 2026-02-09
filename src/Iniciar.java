@@ -1,20 +1,25 @@
+import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Iniciar { // TODO: é necessário documentar o código
+                        // TODO: é necessário mudar o read.me para refletir a nova implementação do projeto
 
     public static IRepositorioClientes repositorioClientes;
+    public static IRepositorioCompras repositorioCompras;
     public static IRepositorioVinhos repositorioVinhos;
 
     public static void main(String[] args){
 
         repositorioClientes = new IRepositorioClientes();
         repositorioVinhos = new IRepositorioVinhos();
-        var repositorioCompras = new IRepositorioCompras();
+        repositorioCompras = new IRepositorioCompras();
 
         repositorioClientes.carregarTodosClientes();
         repositorioCompras.carregarTodasCompras(repositorioClientes, repositorioVinhos);
 
-        Historico.construir();
+        //Historico.construir();
 
         externo: // TODO: é realmente necessário esse rótulo? Acho que dá para refazer esse código sem isso
         do {
@@ -57,9 +62,13 @@ public class Iniciar { // TODO: é necessário documentar o código
 
     static void opcao1(){
 
-        for(Cliente a : Historico.obterClientesPorTotal()){
+        List<Cliente> clientes = repositorioClientes.obterTodosClientes().stream().sorted(
+                                                                                    Comparator.comparingDouble(Cliente::obterTotalCompras).reversed()
+                                                                                    ).collect(Collectors.toList());
 
-            System.out.println(a.obterNome() + " (id: " + a.obterID() + ") --> R$ " + a.obterTotalCompras());
+        for(Cliente cliente : clientes){
+
+            System.out.println(cliente.obterNome() + " (id: " + cliente.obterID() + ") --> R$ " + cliente.obterTotalCompras());
         }
 
         System.out.print("\n\n\n");

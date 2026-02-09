@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Esta classe representa os vinhos
@@ -7,7 +8,7 @@ import java.util.List;
 public class Vinho {
 
     // Definindo campos
-    private String codigo;
+    private UUID codigo;
     private String produto;
     private String variedade;
     private String pais;
@@ -19,7 +20,7 @@ public class Vinho {
 
 
     // Definindo setters
-    public void definirCodigo(String codigo) {
+    public void definirCodigo(UUID codigo) {
         this.codigo = codigo;
     }
 
@@ -57,6 +58,10 @@ public class Vinho {
 
 
     // Definindo getters
+    public UUID obterCodigo() {
+        return codigo;
+    }
+
     public String obterProduto() {
         return produto;
     }
@@ -114,6 +119,8 @@ public class Vinho {
 
         return SSN;
     }
+
+    float obterPreco() { return preco; }
 
     public boolean equals(Vinho vinho) { // Esse método é necessário ao extrair os dados dos arquivos json. Nesses arquivos, os vinhos não vêm com uma informação específica que os identifique.
 

@@ -1,15 +1,11 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializer;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,27 +24,9 @@ public class IRepositorioCompras {
 
             reader.close();
 
-            Gson gson = new GsonBuilder() // TODO: transforme esses TypeAdapters em classes
-                    .registerTypeAdapter(LocalDate.class, (JsonDeserializer<LocalDate>) (json, type, jsonDeserializationContext) -> {
-
-                try {
-                    return LocalDate.parse(json.getAsJsonPrimitive().getAsString(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-                } catch (DateTimeParseException e) {
-                    return LocalDate.parse(json.getAsJsonPrimitive().getAsString(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-                }
-
-            })
-                    .registerTypeAdapter(Cliente.class,
-                            (JsonDeserializer<Cliente>) (json,
-                                                         type,
-                                                         jsonDeserializationContext)
-                                    -> repClientes.buscarPorCPF(
-                                            AdaptadorCPF.removerSeparadores(
-                                                    json.getAsJsonPrimitive().getAsString()
-                                            )
-                                    )
-                                    .get()
-                    ).registerTypeAdapter(Vinho.class, new JSONDeserializerVinho(repVinhos))
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(Compra.class, new JSONDeserializerCompra(repClientes))
+                    .registerTypeAdapter(Vinho.class, new JSONDeserializerVinho(repVinhos))
                     .create();
 
             TypeToken<List<Compra>> collectionType = new TypeToken<>() {
@@ -64,6 +42,11 @@ public class IRepositorioCompras {
             System.exit(1);
         } catch (IOException e) {
         }
+    }
+
+    public float obterTotalComprasPorCliente(Cliente cliente) {
+
+        return todasAsCompras.stream().filter( x -> x.obterCliente() == cliente).reduce(0.0f, (subtotal, elemento) -> subtotal + elemento.obterValorTotal(), Float::sum);
     }
 
 

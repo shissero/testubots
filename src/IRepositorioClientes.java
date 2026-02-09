@@ -15,7 +15,7 @@ public class IRepositorioClientes {
     /**
      * Esta função carrega na memória todos os clientes.
      */
-     // Esta implementação é provisória, pretendo integrar com o MySQL assim que instalar mais armazenamento interno na minha máquina
+    // Esta implementação é provisória, pretendo integrar com o MySQL assim que instalar mais armazenamento interno na minha máquina
     public void carregarTodosClientes() {
 
         String arquivo_clientes = "res/clientes";
@@ -42,26 +42,55 @@ public class IRepositorioClientes {
         catch (IOException e){}
     }
 
-    public void adicionar(Cliente cliente) {
+    public void adicionarCliente(Cliente cliente) {
 
+        cliente.definirID(UUID.randomUUID());
         todosOsClientes.add(cliente);
     }
 
     public Optional<Cliente> buscarPorCPF(String cpf) {
 
-        return todosOsClientes.stream().filter(x -> x.obterCPF().equals(cpf)).findFirst();
+        Optional<Cliente> resultado = todosOsClientes.stream().filter(x -> x.obterCPF().equals(cpf)).findFirst();
+
+        if (resultado.isPresent()) {
+
+            Cliente cliente = resultado.get();
+
+            return Optional.of(new Cliente(cliente));
+        }
+
+        return Optional.empty();
+    }
+
+    public Optional<Cliente> buscarPorId(UUID id) {
+
+        Optional<Cliente> resultado = todosOsClientes.stream().filter(el -> el.obterID() == id).findFirst();
+
+        if (resultado.isPresent()) {
+
+            Cliente cliente = resultado.get();
+
+            return Optional.of(new Cliente(cliente));
+        }
+
+        return Optional.empty();
+    }
+
+    public List<Cliente> obterTodosClientes() {
+
+        return todosOsClientes.stream().map(Cliente::new).collect(Collectors.toList());
     }
 
     void atualizar(Cliente cli_novo) {
-/*
-        Optional<Cliente> cliente = buscarPorId(cli_novo.obterID());
 
-        cliente.ifPresent(cli -> cli = cli_novo);*/
+        todosOsClientes.removeIf(el -> el.obterID() == cli_novo.obterID());
+
+        todosOsClientes.add(cli_novo);
     }
 
-    void remover(Cliente cliente) {
-/*
-        todosOsClientes.remove(cliente);*/
+    void remover(UUID id) {
+
+        todosOsClientes.removeIf(el -> el.obterID() == id);
     }
 
     // Definindo campos

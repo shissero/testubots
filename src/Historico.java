@@ -39,7 +39,7 @@ public class Historico {
      * Carrega os dados das compras na memória
      */
     private static void armazenarCompras() {
-        try {
+        /*try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader("res/compras_historico"));
 
             String linha = bufferedReader.readLine();
@@ -109,7 +109,7 @@ public class Historico {
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     /**
@@ -131,7 +131,7 @@ public class Historico {
 
                 linha = bufferedReader.readLine();
                 linha = extrairInformacao(linha, 2);
-                cliente.definirID(Integer.parseInt(linha.substring(2, linha.length() - 1)));
+                //cliente.definirID(Integer.parseInt(linha.substring(2, linha.length() - 1)));
 
                 linha = bufferedReader.readLine();
                 cliente.definirNome(extrairInformacao(linha, 3));

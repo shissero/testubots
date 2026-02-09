@@ -88,9 +88,9 @@ public class IRepositorioClientes {
         todosOsClientes.add(cli_novo);
     }
 
-    void remover(Cliente cliente) {
-/*
-        todosOsClientes.remove(cliente);*/
+    void remover(UUID id) {
+
+        todosOsClientes.removeIf(el -> el.obterID() == id);
     }
 
     // Definindo campos

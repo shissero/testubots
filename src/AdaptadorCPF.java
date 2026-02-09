@@ -7,8 +7,6 @@ import java.io.IOException;
 
 public class AdaptadorCPF extends TypeAdapter<String> {
 
-    private String formato;
-
     public static String removerSeparadores(String cpf){
 
         return cpf.replaceAll("\\D", "");

@@ -1,7 +1,4 @@
-import java.util.Comparator;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Iniciar { // TODO: é necessário documentar o código
                         // TODO: é necessário mudar o read.me para refletir a nova implementação do projeto

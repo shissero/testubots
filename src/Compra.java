@@ -22,7 +22,6 @@ public class Compra {
     // Nomear esse item como "vinhos" vai criar problemas na hora da desserialização
     //@JsonAdapter(JSONDeserializerVinho.class)
     private List<Vinho> itens = new ArrayList<>();
-    private float valorTotal = 0;
 
     Compra(){}
 
@@ -50,10 +49,6 @@ public class Compra {
 
     public void definirCliente(UUID cliente) {
         this.cliente = cliente;
-    }
-
-    public void definirValorTotal(float valor) {
-        this.valorTotal = valor;
     }
 
     public void adicionarVinho(Vinho vinho) {

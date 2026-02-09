@@ -95,9 +95,9 @@ public class IRepositorio { // TODO: testar as funções de busca de cliente
 
     void atualizar(Cliente cli_novo) {
 
-        todosOsClientes.removeIf(el -> el.obterID() == cli_novo.obterID());
+        boolean resultado = todosOsClientes.removeIf(el -> el.obterID().equals(cli_novo.obterID()));
 
-        todosOsClientes.add(cli_novo);
+        if(resultado) todosOsClientes.add(cli_novo);
     }
 
     void atualizar(Vinho vinho_novo){

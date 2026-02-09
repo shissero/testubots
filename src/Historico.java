@@ -131,7 +131,7 @@ public class Historico {
 
                 linha = bufferedReader.readLine();
                 linha = extrairInformacao(linha, 2);
-                cliente.definirID(Integer.parseInt(linha.substring(2, linha.length() - 1)));
+                //cliente.definirID(Integer.parseInt(linha.substring(2, linha.length() - 1)));
 
                 linha = bufferedReader.readLine();
                 cliente.definirNome(extrairInformacao(linha, 3));

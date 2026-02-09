@@ -1,7 +1,9 @@
+import classes_de_dados.AdaptadorIdCliente;
 import com.google.gson.annotations.JsonAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static java.lang.System.*;
 
@@ -11,7 +13,8 @@ import static java.lang.System.*;
 public class Cliente {
 
     // Definindo campos
-    private int id;
+    @JsonAdapter(AdaptadorIdCliente.class)
+    private UUID id;
     private String nome;
 
     @JsonAdapter(AdaptadorCPF.class)
@@ -23,7 +26,7 @@ public class Cliente {
 
 
     // Definindo setters
-    public void definirID(int id) {
+    public void definirID(UUID id) {
         this.id = id;
     }
 
@@ -51,7 +54,7 @@ public class Cliente {
 
 
     // Definindo getters
-    public int obterID() {
+    public UUID obterID() {
         return id;
     }
 

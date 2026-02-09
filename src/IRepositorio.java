@@ -12,6 +12,9 @@ import java.util.stream.Collectors;
  */
 public class IRepositorio {
 
+
+    List<Vinho> todosVinhos = new ArrayList<>();
+
     /**
      * Esta função carrega na memória todos os clientes.
      */
@@ -48,7 +51,12 @@ public class IRepositorio {
         todosOsClientes.add(cliente);
     }
 
-    public Optional<Cliente> buscarPorCPF(String cpf) {
+    public void adicionarVinho(Vinho vinho){
+
+        todosVinhos.add(vinho);
+    }
+
+    public Optional<Cliente> buscarClientePorCPF(String cpf) {
 
         Optional<Cliente> resultado = todosOsClientes.stream().filter(x -> x.obterCPF().equals(cpf)).findFirst();
 
@@ -62,7 +70,7 @@ public class IRepositorio {
         return Optional.empty();
     }
 
-    public Optional<Cliente> buscarPorId(UUID id) {
+    public Optional<Cliente> buscarClientePorId(UUID id) {
 
         Optional<Cliente> resultado = todosOsClientes.stream().filter(el -> el.obterID() == id).findFirst();
 

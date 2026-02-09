@@ -107,7 +107,7 @@ public class IRepositorio { // TODO: testar as funções de busca de cliente
         todosVinhos.add(vinho_novo);
     }
 
-    void remover(UUID id) {
+    void removerCliente(UUID id) {
 
         todosOsClientes.removeIf(el -> el.obterID() == id);
     }

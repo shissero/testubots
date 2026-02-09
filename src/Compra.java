@@ -70,7 +70,7 @@ public class Compra {
     }
 
     public List<Vinho> obterVinhos() {
-        return itens;
+        return new ArrayList<>(itens);
     }
 
     public float obterValorTotal() {

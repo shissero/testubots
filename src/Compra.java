@@ -18,9 +18,7 @@ public class Compra {
     private LocalDate data;
     private UUID cliente;
 
-    // TODO: Esse nome é provisório, apenas enquanto não domino melhor a Gson
     // Nomear esse item como "vinhos" vai criar problemas na hora da desserialização
-    //@JsonAdapter(JSONDeserializerVinho.class)
     private List<Vinho> itens = new ArrayList<>();
 
     // Definindo construtores

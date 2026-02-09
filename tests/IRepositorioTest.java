@@ -6,17 +6,29 @@ import java.util.UUID;
 class IRepositorioTest {
 
     @Test
-    void atualizar() {
+    void atualizarCliente() {
 
-        IRepositorio rep = new IRepositorio();
+        String id = "3fde36a6-c9a1-4d27-9f0f-7c12ab0d1cdd";
 
-        rep.carregarTodosClientes();
+        IRepositorio repositorio = new IRepositorio();
 
-        Cliente cliente = rep.obterTodosClientes().get(0);
+        String cpf = "00000000001";
 
-        cliente.definirNome("Elton");
+        Cliente cliente = new Cliente();
 
-        rep.atualizar(cliente);
+        cliente.definirID(UUID.fromString(id));
+
+        cliente.definirCPF(cpf);
+
+        repositorio.adicionarCliente(cliente);
+
+        Cliente novo = new Cliente(cliente);
+
+        novo.definirID(UUID.fromString(id));
+
+        novo.definirCPF("00000000002");
+
+        repositorio.atualizar(novo);
 
         return;
     }

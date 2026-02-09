@@ -76,9 +76,9 @@ public class IRepositorioClientes {
         return Optional.empty();
     }
 
-    public List<Cliente> obterTodosClientes(){
+    public List<Cliente> obterTodosClientes() {
 
-        return todosOsClientes;
+        return todosOsClientes.stream().map(Cliente::new).collect(Collectors.toList());
     }
 
     void atualizar(Cliente cli_novo) {

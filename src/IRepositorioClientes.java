@@ -42,8 +42,9 @@ public class IRepositorioClientes {
         catch (IOException e){}
     }
 
-    public void adicionar(Cliente cliente) {
+    public void adicionarCliente(Cliente cliente) {
 
+        cliente.definirID(UUID.randomUUID());
         todosOsClientes.add(cliente);
     }
 
@@ -58,10 +59,10 @@ public class IRepositorioClientes {
     }
 
     void atualizar(Cliente cli_novo) {
-/*
-        Optional<Cliente> cliente = buscarPorId(cli_novo.obterID());
 
-        cliente.ifPresent(cli -> cli = cli_novo);*/
+        todosOsClientes.removeIf(el -> el.obterID() == cli_novo.obterID());
+
+        todosOsClientes.add(cli_novo);
     }
 
     void remover(Cliente cliente) {

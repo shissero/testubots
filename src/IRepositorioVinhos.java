@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public class IRepositorioVinhos {
 
@@ -16,7 +17,7 @@ public class IRepositorioVinhos {
 
     public void adicionarVinho(Vinho vinho) {
 
-        vinho.definirCodigo(String.valueOf(todosVinhos.size()));
+        vinho.definirCodigo(UUID.randomUUID());
 
         todosVinhos.add(vinho);
     }

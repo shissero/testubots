@@ -18,19 +18,6 @@ public class Vinho {
     private List<Cliente> compradores = new ArrayList<>();
     private List<Cliente> naoCompradores = new ArrayList<>();
 
-    Vinho(){}
-
-    Vinho(Vinho vinho){
-
-        this.codigo = vinho.codigo;
-        this.produto = vinho.produto;
-        this.variedade = vinho.variedade;
-        this.pais = vinho.pais;
-        this.categoria = vinho.categoria;
-        this.safra = vinho.safra;
-        this.preco = vinho.preco;
-    }
-
 
     // Definindo setters
     public void definirCodigo(UUID codigo) {

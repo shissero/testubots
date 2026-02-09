@@ -19,7 +19,7 @@ public class Iniciar { // TODO: é necessário documentar o código
         repositorioClientes.carregarTodosClientes();
         repositorioCompras.carregarTodasCompras(repositorioClientes, repositorioVinhos);
 
-        Historico.construir();
+        //Historico.construir();
 
         externo: // TODO: é realmente necessário esse rótulo? Acho que dá para refazer esse código sem isso
         do {

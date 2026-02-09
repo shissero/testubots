@@ -32,8 +32,7 @@ public class JSONDeserializerCompra implements JsonDeserializer<Compra> {
 
         if (resultado.isPresent()) {
 
-            resultado.get().adicionarCompra(compra);
-            compra.definirCliente(resultado.get());
+            //compra.definirCliente(resultado.get());
         }
         else {
 

@@ -56,7 +56,7 @@ public class Iniciar { // TODO: é necessário documentar o código
 
     static void opcao1(){
 
-        List<Cliente> clientes = repositorioClientes.obterTodosClientes().stream().sorted(
+        /*List<Cliente> clientes = repositorioClientes.obterTodosClientes().stream().sorted(
                                                                                     Comparator.comparingDouble(Cliente::obterTotalCompras).reversed()
                                                                                     ).collect(Collectors.toList());
 
@@ -65,7 +65,7 @@ public class Iniciar { // TODO: é necessário documentar o código
             System.out.println(cliente.obterNome() + " (id: " + cliente.obterID() + ") --> R$ " + cliente.obterTotalCompras());
         }
 
-        System.out.print("\n\n\n");
+        System.out.print("\n\n\n");*/
     }
 
     static void opcao2(){
@@ -81,7 +81,7 @@ public class Iniciar { // TODO: é necessário documentar o código
                 System.out.println("Nenhuma compra encontrada para este ano.");
             else {
                 for (Compra a : Historico.obterMaiorCompraDoAno(ano)) {
-                    System.out.println(a.obterCliente().obterNome() + " (id: " + a.obterCliente().obterID() + ")");
+                    //System.out.println(a.obterCliente().obterNome() + " (id: " + a.obterCliente().obterID() + ")");
                     System.out.println("\tCódigo da compra: " + a.obterCodigo() + "\t\tValor: " + a.obterValorTotal());
                 }
             }
@@ -106,12 +106,12 @@ public class Iniciar { // TODO: é necessário documentar o código
 
     static void opcao3(){
 
-        for(Cliente a : Historico.obterClientesMaisFieis()) System.out.println(a.obterNome() + " (id: " + a.obterID() + "): " + a.obterHistorico().size() + " compra(s)");
+        //for(Cliente a : Historico.obterClientesMaisFieis()) System.out.println(a.obterNome() + " (id: " + a.obterID() + "): " + a.obterHistorico().size() + " compra(s)");
     }
 
     static void opcao4(){
 
-        Scanner sc = new Scanner(System.in);
+        /*Scanner sc = new Scanner(System.in);
 
         externo:
         do{
@@ -153,6 +153,6 @@ public class Iniciar { // TODO: é necessário documentar o código
                         System.out.println("Opção inválida");
                 }
             }while(true);
-        }while(true);
+        }while(true);*/
     }
 }

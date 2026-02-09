@@ -14,6 +14,7 @@ public class IRepositorio { // TODO: testar as funções de busca de cliente
 
 
     List<Vinho> todosVinhos = new ArrayList<>();
+    List<Compra> todasAsCompras = new ArrayList<>();
 
     /**
      * Esta função carrega na memória todos os clientes.
@@ -55,6 +56,11 @@ public class IRepositorio { // TODO: testar as funções de busca de cliente
         todosVinhos.add(vinho);
     }
 
+    public void adicionarCompra(Compra compra){
+
+        todasAsCompras.add(compra);
+    }
+
     public Optional<Cliente> buscarClientePorCPF(String cpf) {
 
         Optional<Cliente> resultado = todosOsClientes.stream().filter(el -> el.obterCPF().equals(cpf)).findFirst();
@@ -91,6 +97,11 @@ public class IRepositorio { // TODO: testar as funções de busca de cliente
     public Optional<Vinho> buscarVinhoPorCodigo(UUID id) {
 
         return todosVinhos.stream().filter(el -> el.obterCodigo().equals(id)).findFirst();
+    }
+
+    public Optional<Compra> buscarCompraPorCodigo(UUID id){
+
+        return todasAsCompras.stream().filter(el -> el.obterCodigo().equals(id)).findFirst();
     }
 
     void atualizar(Cliente cli_novo) {

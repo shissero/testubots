@@ -174,4 +174,36 @@ class IRepositorioTest {
 
         return;
     }
+
+    @Test
+    void adicionarCompra() {
+
+        IRepositorio repositorio = new IRepositorio();
+
+        Compra compra = new Compra();
+
+        compra.definirCodigo(UUID.randomUUID());
+
+        repositorio.adicionarCompra(compra);
+
+        return;
+    }
+
+    @Test
+    void buscarCompraPorCodigo() {
+
+        IRepositorio repositorio = new IRepositorio();
+
+        String codigo = "3fde36a6-c9a1-4d27-9f0f-7c12ab0d1cdd";
+
+        Compra compra = new Compra();
+
+        compra.definirCodigo(UUID.fromString(codigo));
+
+        repositorio.adicionarCompra(compra);
+
+        Optional<Compra> resultado = repositorio.buscarCompraPorCodigo(UUID.fromString(codigo));
+
+        return;
+    }
 }

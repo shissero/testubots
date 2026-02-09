@@ -1,5 +1,8 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+import java.util.UUID;
+
 class IRepositorioTest {
 
     @Test
@@ -42,6 +45,28 @@ class IRepositorioTest {
         Cliente cliente = rep.obterTodosClientes().get(0);
 
         rep.remover(cliente.obterID());
+
+        return;
+    }
+
+    @Test
+    void buscarVinhoPorCodigo() {
+
+        String codigo = "3fde36a6-c9a1-4d27-9f0f-7c12ab0d1cdd";
+
+        IRepositorio repositorio = new IRepositorio();
+
+        UUID id = UUID.fromString(codigo);
+
+        Vinho vinho = new Vinho();
+
+        vinho.definirCodigo(id);
+
+        vinho.definirCategoria("Tinto");
+
+        repositorio.adicionarVinho(vinho);
+
+        Optional<Vinho> resultado = repositorio.buscarVinhoPorCodigo(UUID.fromString(codigo));
 
         return;
     }

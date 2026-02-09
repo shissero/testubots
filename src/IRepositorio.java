@@ -88,6 +88,11 @@ public class IRepositorio {
         return todosOsClientes.stream().map(Cliente::new).collect(Collectors.toList());
     }
 
+    public Optional<Vinho> buscarVinhoPorCodigo(UUID id) {
+
+        return todosVinhos.stream().filter(el -> el.obterCodigo().equals(id)).findFirst();
+    }
+
     void atualizar(Cliente cli_novo) {
 
         todosOsClientes.removeIf(el -> el.obterID() == cli_novo.obterID());

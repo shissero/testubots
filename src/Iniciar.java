@@ -8,16 +8,13 @@ public class Iniciar { // TODO: é necessário documentar o código
 
     public static IRepositorio repositorioClientes;
     public static IRepositorioCompras repositorioCompras;
-    public static IRepositorioVinhos repositorioVinhos;
 
     public static void main(String[] args){
 
         repositorioClientes = new IRepositorio();
-        repositorioVinhos = new IRepositorioVinhos();
         repositorioCompras = new IRepositorioCompras();
 
         repositorioClientes.carregarTodosClientes();
-        repositorioCompras.carregarTodasCompras(repositorioClientes, repositorioVinhos);
 
         //Historico.construir();
 

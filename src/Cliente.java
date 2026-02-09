@@ -1,4 +1,3 @@
-import classes_de_dados.AdaptadorIdCliente;
 import com.google.gson.annotations.JsonAdapter;
 
 import java.util.ArrayList;

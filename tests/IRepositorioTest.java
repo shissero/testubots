@@ -48,15 +48,19 @@ class IRepositorioTest {
     }
 
     @Test
-    void remover() {
+    void removerCliente() {
 
-        IRepositorio rep = new IRepositorio();
+        IRepositorio repositorio = new IRepositorio();
 
-        rep.carregarTodosClientes();
+        String codigo = "3fde36a6-c9a1-4d27-9f0f-7c12ab0d1cdd";
 
-        Cliente cliente = rep.obterTodosClientes().get(0);
+        Cliente cliente = new Cliente();
 
-        rep.removerCliente(cliente.obterID());
+        cliente.definirID(UUID.fromString(codigo));
+
+        repositorio.adicionarCliente(cliente);
+
+        repositorio.removerCliente(UUID.fromString(codigo));
 
         return;
     }

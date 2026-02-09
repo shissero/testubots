@@ -135,6 +135,11 @@ public class IRepositorio { // TODO: testar as funções de busca de cliente
         todosVinhos.removeIf(el -> el.obterCodigo().equals(id));
     }
 
+    void removerCompra(UUID id){
+
+        todasAsCompras.removeIf(el -> el.obterCodigo().equals(id));
+    }
+
     // Definindo campos
     private List<Cliente> todosOsClientes = new ArrayList<>();
 }

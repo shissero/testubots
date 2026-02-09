@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Classe de dados para representar compras
@@ -11,7 +12,7 @@ import java.util.List;
 public class Compra {
 
     // Definindo campos
-    private String codigo;
+    private UUID codigo;
 
     @JsonAdapter(JSONDeserializerLocalDate.class)
     private LocalDate data;
@@ -26,7 +27,7 @@ public class Compra {
 
 
     // Definindo setters
-    public void definirCodigo(String codigo) {
+    public void definirCodigo(UUID codigo) {
         this.codigo = codigo;
     }
 
@@ -56,7 +57,7 @@ public class Compra {
         return cliente;
     }
 
-    public String obterCodigo() {
+    public UUID obterCodigo() {
         return codigo;
     }
 

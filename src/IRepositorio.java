@@ -18,6 +18,18 @@ public class IRepositorio {
     List<Vinho> todosVinhos = new ArrayList<>();
     List<Compra> todasAsCompras = new ArrayList<>();
 
+    // Implementando padrão singleton
+    private static IRepositorio instancia = null;
+
+    private IRepositorio(){}
+
+    public static IRepositorio obterInstancia() {
+
+        if(instancia == null) instancia = new IRepositorio();
+
+        return instancia;
+    }
+
     // Definindo as operações CRUD
     public void adicionarCliente(Cliente cliente) {
 

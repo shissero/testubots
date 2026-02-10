@@ -9,9 +9,11 @@ import java.time.format.DateTimeFormatter;
 
 public class JSONDeserializerLocalDate implements JsonDeserializer<LocalDate> {
 
+    public static final String pattern = "dd-MM-yyyy";
+
     @Override
     public LocalDate deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
 
-        return LocalDate.parse(jsonElement.getAsJsonPrimitive().getAsString(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        return LocalDate.parse(jsonElement.getAsJsonPrimitive().getAsString(), DateTimeFormatter.ofPattern(pattern));
     }
 }

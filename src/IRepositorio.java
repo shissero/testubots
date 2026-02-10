@@ -118,14 +118,17 @@ public class IRepositorio {
      *
      * @param arquivoClientes: caminho para o arquivo com os dados dos clientes
      */
-    public void carregarClientesJSON(String arquivo_clientes) {
+    // TODO: Corrigir esta função para verificar se os usuários já existem no banco de dados e se há conflito entre os dados JSON e os dados do BD
+    public void carregarClientesJSON(String arquivoClientes) {
+
+        List<Cliente> clientesJSON = null;
 
         try {
 
             String clientes_json = Utils.lerArquivo(arquivoClientes);
 
             Type listType = new TypeToken<ArrayList<Cliente>>(){}.getType();
-            todosOsClientes = new Gson().fromJson(clientes_json, listType);
+            clientesJSON = new Gson().fromJson(clientes_json, listType);
         }
         catch (FileNotFoundException e) {
 
@@ -135,6 +138,7 @@ public class IRepositorio {
 
             System.exit(1);
         }
-        catch (IOException e){}
+
+        if(clientesJSON != null) todosOsClientes.addAll(clientesJSON);
     }
 }

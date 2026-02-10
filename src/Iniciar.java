@@ -8,10 +8,11 @@ public class Iniciar { // TODO: é necessário documentar o código
 
     public static void main(String[] args){
 
-        repositorioClientes = new IRepositorio();
-        repositorioCompras = new IRepositorioCompras();
+        String arquivo_clientes = "res/clientes";
 
-        repositorioClientes.carregarTodosClientes();
+        repositorioClientes = new IRepositorio();
+
+        repositorioClientes.carregarClientesJSON(arquivo_clientes);
 
         //Historico.construir();
 

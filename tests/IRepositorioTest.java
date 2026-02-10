@@ -38,7 +38,7 @@ class IRepositorioTest {
 
         IRepositorio rep = new IRepositorio();
 
-        rep.carregarTodosClientes();
+        rep.carregarClientesJSON();
 
         Cliente cliente = rep.obterTodosClientes().get(0);
 

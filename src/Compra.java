@@ -16,14 +16,16 @@ public class Compra {
 
     @JsonAdapter(JSONDeserializerLocalDate.class)
     private LocalDate data;
-    private UUID cliente;
 
-    // TODO: Esse nome é provisório, apenas enquanto não domino melhor a Gson
+    // Usar transient para que este membro seja ignorado durante a desserialização
+    // com Gson.fromJSON. Na API JSON, os clientes são referenciados por CPF, não
+    // por ID.
+    private transient UUID cliente;
+
     // Nomear esse item como "vinhos" vai criar problemas na hora da desserialização
-    //@JsonAdapter(JSONDeserializerVinho.class)
     private List<Vinho> itens = new ArrayList<>();
-    private float valorTotal = 0;
 
+    // Definindo construtores
     Compra(){}
 
     Compra(Compra compra){
@@ -52,10 +54,6 @@ public class Compra {
         this.cliente = cliente;
     }
 
-    public void definirValorTotal(float valor) {
-        this.valorTotal = valor;
-    }
-
     public void adicionarVinho(Vinho vinho) {
         itens.add(vinho);
     }
@@ -76,7 +74,7 @@ public class Compra {
     }
 
     public List<Vinho> obterVinhos() {
-        return itens;
+        return new ArrayList<>(itens);
     }
 
     public float obterValorTotal() {

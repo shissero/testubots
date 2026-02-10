@@ -1,4 +1,3 @@
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,12 +20,12 @@ public class Historico {
      */
     public static void construir() {
 
-        armazenarClientes();
+        /*armazenarClientes();
         armazenarCompras();
         calcularTotais();
         armazenarItens();
         finalizarClientes();
-        finalizarItens();
+        finalizarItens();*/
 
 
     }
@@ -110,57 +109,6 @@ public class Historico {
         } catch (IOException e) {
             e.printStackTrace();
         }*/
-    }
-
-    /**
-     * Carrega os dados dos clientes na memória,
-     * mas somente id, nome e cpf
-     */
-    private static void armazenarClientes() {
-
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("res/clientes"));
-            String linha;
-
-            // Aqui descarta-se o colchete e chave iniciais
-            bufferedReader.readLine();
-            bufferedReader.readLine();
-
-            do {
-                Cliente cliente = new Cliente();
-
-                linha = bufferedReader.readLine();
-                linha = extrairInformacao(linha, 2);
-                //cliente.definirID(Integer.parseInt(linha.substring(2, linha.length() - 1)));
-
-                linha = bufferedReader.readLine();
-                cliente.definirNome(extrairInformacao(linha, 3));
-
-                linha = bufferedReader.readLine();
-                cliente.definirCPF(extrairInformacao(linha, 3));
-
-                //todosOsClientes.add(cliente);
-
-                bufferedReader.readLine(); // Descarta-se a chave que finaliza a descrição do cliente
-
-                linha = bufferedReader.readLine();
-            } while (!linha.contains("]"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Carrega os dados dos itens na memória,
-     * mas não os campos de compradores e não compradores
-     */
-    private static void armazenarItens() {
-
-        for (Compra a : todasAsCompras) {
-            for (Vinho b : a.obterVinhos()) {
-                if (!Conjunto.pertence(b, todosOsVinhos)) todosOsVinhos.add(b);
-            }
-        }
     }
 
     private static String extrairInformacao(String string, int posicao) {
@@ -266,17 +214,6 @@ public class Historico {
         }*/
 
         return clientesFieis;
-    }
-
-    public static Cliente encontrarClientePorCPF(String cpf) {
-
-        String str = Cliente.validarCPF(cpf);
-
-
-        //for (Cliente a : todosOsClientes) if (a.obterCPF().equals(str)) return a;
-
-        System.out.println("CPF " + str + " não encontrado");
-        return null;
     }
 
     /**

@@ -1,4 +1,5 @@
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
@@ -10,42 +11,14 @@ import java.util.stream.Collectors;
  * Esta classe representa a interface para os repositórios da classe Cliente.
  * Os métodos estão sendo implementados nela somente para facilitar a refatoração mais tarde.
  */
-public class IRepositorio { // TODO: testar as funções de busca de cliente
+public class IRepositorio {
 
-
+    // Definindo campos
+    private List<Cliente> todosOsClientes = new ArrayList<>();
     List<Vinho> todosVinhos = new ArrayList<>();
     List<Compra> todasAsCompras = new ArrayList<>();
 
-    /**
-     * Esta função carrega na memória todos os clientes.
-     */
-    // Esta implementação é provisória, pretendo integrar com o MySQL assim que instalar mais armazenamento interno na minha máquina
-    public void carregarTodosClientes() {
-
-        String arquivo_clientes = "res/clientes";
-
-        try {
-
-            BufferedReader reader = new BufferedReader(new FileReader(arquivo_clientes));
-
-            String clientes_json = reader.lines().collect(Collectors.joining("\n"));
-
-            reader.close();
-
-            Type listType = new TypeToken<ArrayList<Cliente>>(){}.getType();
-            todosOsClientes = new Gson().fromJson(clientes_json, listType);
-        }
-        catch (FileNotFoundException e) {
-
-            System.out.println("Arquivo de clientes não encontrado");
-
-            e.printStackTrace();
-
-            System.exit(1);
-        }
-        catch (IOException e){}
-    }
-
+    // Definindo as operações CRUD
     public void adicionarCliente(Cliente cliente) {
 
         todosOsClientes.add(cliente);
@@ -99,6 +72,11 @@ public class IRepositorio { // TODO: testar as funções de busca de cliente
         return todosVinhos.stream().filter(el -> el.obterCodigo().equals(id)).findFirst();
     }
 
+    public Optional<Vinho> buscarVinhoPorCaracteristicas(Vinho vinho){
+
+        return todosVinhos.stream().filter(el -> el.compararCaracteristicas(vinho)).findFirst();
+    }
+
     public Optional<Compra> buscarCompraPorCodigo(UUID id){
 
         return todasAsCompras.stream().filter(el -> el.obterCodigo().equals(id)).findFirst();
@@ -140,6 +118,66 @@ public class IRepositorio { // TODO: testar as funções de busca de cliente
         todasAsCompras.removeIf(el -> el.obterCodigo().equals(id));
     }
 
-    // Definindo campos
-    private List<Cliente> todosOsClientes = new ArrayList<>();
+
+    /**
+     * Esta função carrega dados de clientes a partir de um arquivo JSON
+     *
+     * @param arquivoClientes: caminho para o arquivo com os dados dos clientes
+     */
+    // TODO: Corrigir esta função para verificar se os usuários já existem no banco de dados e se há conflito entre os dados JSON e os dados do BD
+    public void carregarClientesJSON(String arquivoClientes) {
+
+        List<Cliente> clientesJSON = null;
+
+        try {
+
+            String clientes_json = Utils.lerArquivo(arquivoClientes);
+
+            Type listType = new TypeToken<ArrayList<Cliente>>(){}.getType();
+
+            clientesJSON = new Gson().fromJson(clientes_json, listType);
+        }
+        catch (FileNotFoundException e) {
+
+            System.out.println("Arquivo de clientes não encontrado");
+
+            e.printStackTrace();
+        }
+        catch (IOException e){
+
+            e.printStackTrace();
+        }
+
+        if(clientesJSON != null) todosOsClientes.addAll(clientesJSON);
+    }
+
+    public void carregarComprasJSON(String arquivo_compras) {
+
+        List<Compra> comprasJSON = null;
+
+        try {
+
+            String compras_json = Utils.lerArquivo(arquivo_compras);
+
+
+            Gson gson = new GsonBuilder().registerTypeAdapter(Compra.class, new JSONDeserializerCompra(this)).create();
+
+            Type listType = new TypeToken<ArrayList<Compra>>(){}.getType();
+
+            comprasJSON = gson.fromJson(compras_json, listType);
+
+        } catch (FileNotFoundException e) {
+
+            System.out.println("Arquivo de compras não encontrado");
+
+            e.printStackTrace();
+
+            System.exit(1);
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+
+        if(comprasJSON != null) todasAsCompras.addAll(comprasJSON);
+    }
 }

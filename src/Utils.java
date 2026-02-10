@@ -6,6 +6,13 @@ import java.util.stream.Collectors;
 // TODO: conferir se todos os identificadores - nomes de classes, funções, etc. - estão em português
 public class Utils {
 
+    /**
+     * Lê um arquivo de texto.
+     *
+     * @param caminho: caminho para o arquivo que se quer ler.
+     * @return string com o conteúdo do arquivo especificado.
+     * @throws IOException
+     */
     public static String lerArquivo(String caminho) throws IOException {
 
         BufferedReader leitor = new BufferedReader(new FileReader(caminho));

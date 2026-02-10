@@ -115,6 +115,8 @@ public class IRepositorio {
 
     /**
      * Esta função carrega dados de clientes a partir de um arquivo JSON
+     *
+     * @param arquivoClientes: caminho para o arquivo com os dados dos clientes
      */
     public void carregarClientesJSON(String arquivo_clientes) {
 

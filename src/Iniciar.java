@@ -4,17 +4,8 @@ public class Iniciar { // TODO: é necessário documentar o código
                         // TODO: é necessário mudar o read.me para refletir a nova implementação do projeto
 
     public static IRepositorio repositorioClientes;
-    public static IRepositorioCompras repositorioCompras;
 
     public static void main(String[] args){
-
-        String arquivo_clientes = "res/clientes";
-
-        repositorioClientes = new IRepositorio();
-
-        repositorioClientes.carregarClientesJSON(arquivo_clientes);
-
-        //Historico.construir();
 
         externo: // TODO: é realmente necessário esse rótulo? Acho que dá para refazer esse código sem isso
         do {

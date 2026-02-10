@@ -135,8 +135,10 @@ public class IRepositorio {
             System.out.println("Arquivo de clientes não encontrado");
 
             e.printStackTrace();
+        }
+        catch (IOException e){
 
-            System.exit(1);
+            e.printStackTrace();
         }
 
         if(clientesJSON != null) todosOsClientes.addAll(clientesJSON);

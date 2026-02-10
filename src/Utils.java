@@ -24,6 +24,13 @@ public class Utils {
         return resultado;
     }
 
+    public static boolean compararCLientes(Cliente cliente1, Cliente cliente2){
+
+        return cliente1.obterID().toString().equals(cliente2.obterID().toString())
+                && cliente1.obterNome().equals(cliente2.obterNome())
+                && cliente1.obterCPF().equals(cliente2.obterCPF());
+    }
+
     /*public Vinho sugerirVinho() {
 
     Vinho vinho = null;

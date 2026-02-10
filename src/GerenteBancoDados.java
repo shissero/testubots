@@ -36,6 +36,22 @@ public class GerenteBancoDados {
         }
     }
 
+    public ResultSet executarSelect(String query){
+
+        try {
+
+            Statement statement = obterConexao().createStatement();
+
+            return statement.executeQuery(query);
+
+        } catch (SQLException | ClassNotFoundException e) {
+
+            e.printStackTrace();
+
+            return null;
+        }
+    }
+
     public boolean tabelaExiste(String tabela){
 
         ResultSet resultSet = null;

@@ -1,6 +1,3 @@
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 public class IDAOCliente {
@@ -27,21 +24,13 @@ public class IDAOCliente {
      */
     public int salvarTudo(List<Cliente> clientes){
 
-        try {
-            Connection conexao = (new GerenteBancoDados()).obterConexao();
+        GerenteBancoDados gerente = new GerenteBancoDados();
 
-            Statement statement = conexao.createStatement();
+        // Limpe a tabela antiga e adicione os dados novos
 
-            // Limpe a tabela antiga e adicione os dados novos
-            statement.executeUpdate("TRUNCATE TABLE " + tabelaClientes);
+        gerente.executarInsert("TRUNCATE TABLE " + tabelaClientes);
 
-            return statement.executeUpdate(querySalvar(clientes));
+        return gerente.executarInsert(querySalvar(clientes));
 
-        } catch (SQLException | ClassNotFoundException e) {
-
-            e.printStackTrace();
-
-            return -1;
-        }
     }
 }

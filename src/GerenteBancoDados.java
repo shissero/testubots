@@ -1,6 +1,7 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class GerenteBancoDados {
 
@@ -20,5 +21,21 @@ public class GerenteBancoDados {
         DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
 
         conexao = DriverManager.getConnection(DadosBancoDados.URL, DadosBancoDados.USER, DadosBancoDados.PASSWORD);
+    }
+
+    public int executarInsert(String query){
+
+        try {
+
+            Statement statement = obterConexao().createStatement();
+
+            return statement.executeUpdate(query);
+
+        } catch (SQLException | ClassNotFoundException e) {
+
+            e.printStackTrace();
+
+            return -1;
+        }
     }
 }

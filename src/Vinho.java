@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -90,7 +88,17 @@ public class Vinho {
 
     float obterPreco() { return preco; }
 
-    public boolean equals(Vinho vinho) { // Esse método é necessário ao extrair os dados dos arquivos json. Nesses arquivos, os vinhos não vêm com uma informação específica que os identifique.
+
+
+    // Definindo outros métodos
+
+    /**
+     * Compara dois objetos da classe Vinho e confere se todos os seus membros
+     * - exceto codigo - são iguais
+     * @param vinho: objeto a comparar
+     * @return verdadeiro, se os objetos são iguais
+     */
+    public boolean compararCaracteristicas(Vinho vinho) { // Esse método é necessário ao extrair os dados dos arquivos json. Nesses arquivos, os vinhos não vêm com uma informação específica que os identifique.
 
         return this.produto.equals(vinho.produto) && // Se for incluir o código do produto nesta comparação, alter o método IRepositórioVinhos.buscarVinhoPorVinho, pois este espera que o método equals ignore o campo Vinho.código
                 this.variedade.equals(vinho.variedade) &&

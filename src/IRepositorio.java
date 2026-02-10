@@ -1,4 +1,5 @@
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
@@ -71,6 +72,11 @@ public class IRepositorio {
         return todosVinhos.stream().filter(el -> el.obterCodigo().equals(id)).findFirst();
     }
 
+    public Optional<Vinho> buscarVinhoPorCaracteristicas(Vinho vinho){
+
+        return todosVinhos.stream().filter(el -> el.compararCaracteristicas(vinho)).findFirst();
+    }
+
     public Optional<Compra> buscarCompraPorCodigo(UUID id){
 
         return todasAsCompras.stream().filter(el -> el.obterCodigo().equals(id)).findFirst();
@@ -128,6 +134,7 @@ public class IRepositorio {
             String clientes_json = Utils.lerArquivo(arquivoClientes);
 
             Type listType = new TypeToken<ArrayList<Cliente>>(){}.getType();
+
             clientesJSON = new Gson().fromJson(clientes_json, listType);
         }
         catch (FileNotFoundException e) {
@@ -142,5 +149,35 @@ public class IRepositorio {
         }
 
         if(clientesJSON != null) todosOsClientes.addAll(clientesJSON);
+    }
+
+    public void carregarComprasJSON(String arquivo_compras) {
+
+        List<Compra> comprasJSON = null;
+
+        try {
+
+            String compras_json = Utils.lerArquivo(arquivo_compras);
+
+
+            Gson gson = new GsonBuilder().registerTypeAdapter(Compra.class, new JSONDeserializerCompra(this)).create();
+
+            Type listType = new TypeToken<ArrayList<Compra>>(){}.getType();
+
+            comprasJSON = gson.fromJson(compras_json, listType);
+
+        } catch (FileNotFoundException e) {
+
+            System.out.println("Arquivo de compras não encontrado");
+
+            e.printStackTrace();
+
+            System.exit(1);
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+
+        if(comprasJSON != null) todasAsCompras.addAll(comprasJSON);
     }
 }

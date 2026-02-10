@@ -36,9 +36,11 @@ class IRepositorioTest {
     @Test
     void obterTodosClientes() {
 
+        String arquivo_clientes = "res/clientes";
+
         IRepositorio rep = new IRepositorio();
 
-        rep.carregarClientesJSON();
+        rep.carregarClientesJSON(arquivo_clientes);
 
         Cliente cliente = rep.obterTodosClientes().get(0);
 
@@ -224,7 +226,7 @@ class IRepositorioTest {
 
         novo.definirCodigo(UUID.fromString(id));
 
-        novo.definirValorTotal(54f);
+        novo.definirData("25-12-2018");
 
         repositorio.atualizar(novo);
 
@@ -245,6 +247,21 @@ class IRepositorioTest {
         repositorio.adicionarCompra(compra);
 
         repositorio.removerCompra(UUID.fromString(id));
+
+        return;
+    }
+
+    @Test
+    void carregarComprasJSON() {
+
+        String arquivo_clientes = "res/clientes";
+
+        String arquivo_compras = "res/compras_historico";
+
+        IRepositorio repositorio = new IRepositorio();
+
+        repositorio.carregarClientesJSON(arquivo_clientes);
+        repositorio.carregarComprasJSON(arquivo_compras);
 
         return;
     }

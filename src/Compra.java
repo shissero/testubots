@@ -16,7 +16,11 @@ public class Compra {
 
     @JsonAdapter(JSONDeserializerLocalDate.class)
     private LocalDate data;
-    private UUID cliente;
+
+    // Usar transient para que este membro seja ignorado durante a desserialização
+    // com Gson.fromJSON. Na API JSON, os clientes são referenciados por CPF, não
+    // por ID.
+    private transient UUID cliente;
 
     // Nomear esse item como "vinhos" vai criar problemas na hora da desserialização
     private List<Vinho> itens = new ArrayList<>();

@@ -1,8 +1,8 @@
 import com.google.gson.*;
 
 import java.lang.reflect.Type;
-import java.security.InvalidParameterException;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  *
@@ -23,21 +23,46 @@ public class JSONDeserializerCompra implements JsonDeserializer<Compra> {
         this.repositorio = repositorio;
     }
 
+    private static void logarClienteNaoEncontrado(JsonElement jsonElement){
+
+        System.out.println("Erro ao ler compra");
+        System.out.println("Cliente " + AdaptadorCPF.removerSeparadores(jsonElement.getAsJsonObject().get("cliente").getAsString()) + " não foi encontrado");
+        System.out.println("Cadastrando cliente como \"Desconhecido\"");
+
+    }
+
+    private void adicionarClienteDesconhecido(String cpf, Compra compra){
+
+        Cliente cliente = new Cliente();
+
+        cliente.definirID(UUID.randomUUID());
+        cliente.definirNome("Desconhecido");
+        cliente.definirCPF(cpf);
+
+        compra.definirCliente(cliente.obterID());
+
+        repositorio.adicionarCliente(cliente);
+    }
+
     @Override
     public Compra deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
 
-        Compra compra = (new Gson()).fromJson(jsonElement, Compra.class);
+        Gson gson = new GsonBuilder().registerTypeAdapter(Vinho.class, new JSONDeserializerVinho(repositorio)).create();
 
-        Optional<Cliente> resultado = repositorio.buscarClientePorCPF(AdaptadorCPF.removerSeparadores(jsonElement.getAsJsonObject().get("cliente").getAsString()));
+        Compra compra = gson.fromJson(jsonElement, Compra.class);
+
+        String cpfCliente = AdaptadorCPF.removerSeparadores(jsonElement.getAsJsonObject().get("cliente").getAsString());
+
+        Optional<Cliente> resultado = repositorio.buscarClientePorCPF(cpfCliente);
 
         if (resultado.isPresent()) {
 
-            //compra.definirCliente(resultado.get());
+            compra.definirCliente(resultado.get().obterID());
         }
         else {
 
-            System.err.println("Cliente " + AdaptadorCPF.removerSeparadores(jsonElement.getAsJsonObject().get("cliente").getAsString()) + " não foi encontrado");
-            throw new InvalidParameterException();
+            logarClienteNaoEncontrado(jsonElement);
+            adicionarClienteDesconhecido(cpfCliente, compra);
         }
 
         return compra;

@@ -10,7 +10,7 @@ class IRepositorioTest {
 
         String id = "3fde36a6-c9a1-4d27-9f0f-7c12ab0d1cdd";
 
-        IRepositorio repositorio = new IRepositorio();
+        IRepositorio repositorio = IRepositorio.obterInstancia();
 
         String cpf = "00000000001";
 
@@ -38,7 +38,7 @@ class IRepositorioTest {
 
         String arquivo_clientes = "res/clientes";
 
-        IRepositorio rep = new IRepositorio();
+        IRepositorio rep = IRepositorio.obterInstancia();
 
         rep.carregarClientesJSON(arquivo_clientes);
 
@@ -52,7 +52,7 @@ class IRepositorioTest {
     @Test
     void removerCliente() {
 
-        IRepositorio repositorio = new IRepositorio();
+        IRepositorio repositorio = IRepositorio.obterInstancia();
 
         String codigo = "3fde36a6-c9a1-4d27-9f0f-7c12ab0d1cdd";
 
@@ -72,7 +72,7 @@ class IRepositorioTest {
 
         String codigo = "3fde36a6-c9a1-4d27-9f0f-7c12ab0d1cdd";
 
-        IRepositorio repositorio = new IRepositorio();
+        IRepositorio repositorio = IRepositorio.obterInstancia();
 
         UUID id = UUID.fromString(codigo);
 
@@ -92,7 +92,7 @@ class IRepositorioTest {
     @Test
     void testAtualizarVinho() {
 
-        IRepositorio repositorio = new IRepositorio();
+        IRepositorio repositorio = IRepositorio.obterInstancia();
 
         Vinho vinho1 = new Vinho();
 
@@ -122,7 +122,7 @@ class IRepositorioTest {
 
         String codigo = "3fde36a6-c9a1-4d27-9f0f-7c12ab0d1cdd";
 
-        IRepositorio repositorio = new IRepositorio();
+        IRepositorio repositorio = IRepositorio.obterInstancia();
 
         Vinho vinho1 = new Vinho();
 
@@ -142,7 +142,7 @@ class IRepositorioTest {
     @Test
     void buscarClientePorCPF() {
 
-        IRepositorio repositorio = new IRepositorio();
+        IRepositorio repositorio = IRepositorio.obterInstancia();
 
         String cpf1 = "00000000001";
 
@@ -162,7 +162,7 @@ class IRepositorioTest {
     @Test
     void buscarClientePorId() {
 
-        IRepositorio repositorio = new IRepositorio();
+        IRepositorio repositorio = IRepositorio.obterInstancia();
 
         String codigo = "3fde36a6-c9a1-4d27-9f0f-7c12ab0d1cdd";
 
@@ -180,7 +180,7 @@ class IRepositorioTest {
     @Test
     void adicionarCompra() {
 
-        IRepositorio repositorio = new IRepositorio();
+        IRepositorio repositorio = IRepositorio.obterInstancia();
 
         Compra compra = new Compra();
 
@@ -194,7 +194,7 @@ class IRepositorioTest {
     @Test
     void buscarCompraPorCodigo() {
 
-        IRepositorio repositorio = new IRepositorio();
+        IRepositorio repositorio = IRepositorio.obterInstancia();
 
         String codigo = "3fde36a6-c9a1-4d27-9f0f-7c12ab0d1cdd";
 
@@ -214,7 +214,7 @@ class IRepositorioTest {
 
         String id = "3fde36a6-c9a1-4d27-9f0f-7c12ab0d1cdd";
 
-        IRepositorio repositorio = new IRepositorio();
+        IRepositorio repositorio = IRepositorio.obterInstancia();
 
         Compra compra = new Compra();
 
@@ -238,7 +238,7 @@ class IRepositorioTest {
 
         String id = "3fde36a6-c9a1-4d27-9f0f-7c12ab0d1cdd";
 
-        IRepositorio repositorio = new IRepositorio();
+        IRepositorio repositorio = IRepositorio.obterInstancia();
 
         Compra compra = new Compra();
 
@@ -258,7 +258,7 @@ class IRepositorioTest {
 
         String arquivo_compras = "res/compras_historico";
 
-        IRepositorio repositorio = new IRepositorio();
+        IRepositorio repositorio = IRepositorio.obterInstancia();
 
         repositorio.carregarClientesJSON(arquivo_clientes);
         repositorio.carregarComprasJSON(arquivo_compras);

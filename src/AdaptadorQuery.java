@@ -25,4 +25,25 @@ public class AdaptadorQuery {
 
         return String.join(", ", strings);
     }
+
+    public static String vinhoCampos(){
+
+        return "(codigo, produto, variedade, pais, categoria, safra, preco)";
+    }
+
+    public static String vinho(Vinho vinho){
+
+        return "(\"" + vinho.obterCodigo() + "\", \"" + vinho.obterProduto() + "\", \"" + vinho.obterVariedade()
+                + "\", \"" + vinho.obterPais() + "\", \"" + vinho.obterCategoria() + "\", \"" + vinho.obterSafra()
+                + "\", \"" + vinho.obterPreco() + "\")";
+    }
+
+    public static String listaVinhos(List<Vinho> vinhos){
+
+        List<String> strings = new ArrayList<>();
+
+        for (Vinho vinho : vinhos) strings.add(AdaptadorQuery.vinho(vinho));
+
+        return String.join(", ", strings);
+    }
 }

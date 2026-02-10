@@ -17,7 +17,36 @@ public class IRepositorio {
     List<Vinho> todosVinhos = new ArrayList<>();
     List<Compra> todasAsCompras = new ArrayList<>();
 
-    // Definindo as operações CRUD
+    /**
+     * Esta função carrega na memória todos os clientes.
+     */
+    // Esta implementação é provisória, pretendo integrar com o MySQL assim que instalar mais armazenamento interno na minha máquina
+    public void carregarTodosClientes() {
+
+        String arquivo_clientes = "res/clientes";
+
+        try {
+
+            BufferedReader reader = new BufferedReader(new FileReader(arquivo_clientes));
+
+            String clientes_json = reader.lines().collect(Collectors.joining("\n"));
+
+            reader.close();
+
+            Type listType = new TypeToken<ArrayList<Cliente>>(){}.getType();
+            todosOsClientes = new Gson().fromJson(clientes_json, listType);
+        }
+        catch (FileNotFoundException e) {
+
+            System.out.println("Arquivo de clientes não encontrado");
+
+            e.printStackTrace();
+
+            System.exit(1);
+        }
+        catch (IOException e){}
+    }
+
     public void adicionarCliente(Cliente cliente) {
 
         todosOsClientes.add(cliente);
@@ -112,32 +141,4 @@ public class IRepositorio {
         todasAsCompras.removeIf(el -> el.obterCodigo().equals(id));
     }
 
-
-    /**
-     * Esta função carrega dados de clientes a partir de um arquivo JSON
-     */
-    // Esta implementação é provisória, pretendo integrar com o MySQL assim que instalar mais armazenamento interno na minha máquina
-    public void carregarClientesJSON(String arquivo_clientes) {
-
-        try {
-
-            BufferedReader reader = new BufferedReader(new FileReader(arquivo_clientes));
-
-            String clientes_json = reader.lines().collect(Collectors.joining("\n"));
-
-            reader.close();
-
-            Type listType = new TypeToken<ArrayList<Cliente>>(){}.getType();
-            todosOsClientes = new Gson().fromJson(clientes_json, listType);
-        }
-        catch (FileNotFoundException e) {
-
-            System.out.println("Arquivo de clientes não encontrado");
-
-            e.printStackTrace();
-
-            System.exit(1);
-        }
-        catch (IOException e){}
-    }
 }

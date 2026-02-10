@@ -16,9 +16,9 @@ public class JSONDeserializerVinho implements JsonDeserializer<Vinho> {
      * Um repositório onde procurar os vinhos
      *
      */
-    private IRepositorioVinhos repositorio;
+    private IRepositorio repositorio;
 
-    JSONDeserializerVinho(IRepositorioVinhos repositorio) {
+    JSONDeserializerVinho(IRepositorio repositorio) {
 
         this.repositorio = repositorio;
     }
@@ -34,12 +34,15 @@ public class JSONDeserializerVinho implements JsonDeserializer<Vinho> {
 
         Vinho vinho = (new Gson()).fromJson(jsonElement, Vinho.class);
 
-        Optional<Vinho> resultado = repositorio.buscarVinhoPorVinho(vinho);
+        Optional<Vinho> resultado = repositorio.buscarVinhoPorCaracteristicas(vinho);
 
         if (resultado.isPresent()) return resultado.get();
         else{
 
+            if(vinho.obterCodigo() == null) vinho.definirCodigo(UUID.randomUUID());
+
             repositorio.adicionarVinho(vinho);
+
             return vinho;
         }
     }

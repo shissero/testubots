@@ -120,11 +120,7 @@ public class IRepositorio {
 
         try {
 
-            BufferedReader reader = new BufferedReader(new FileReader(arquivo_clientes));
-
-            String clientes_json = reader.lines().collect(Collectors.joining("\n"));
-
-            reader.close();
+            String clientes_json = Utils.lerArquivo(arquivoClientes);
 
             Type listType = new TypeToken<ArrayList<Cliente>>(){}.getType();
             todosOsClientes = new Gson().fromJson(clientes_json, listType);

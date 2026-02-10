@@ -1,8 +1,21 @@
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.stream.Collectors;
 
-import static java.lang.System.out;
-
+// TODO: conferir se todos os identificadores - nomes de classes, funções, etc. - estão em português
 public class Utils {
+
+    public static String lerArquivo(String caminho) throws IOException {
+
+        BufferedReader leitor = new BufferedReader(new FileReader(caminho));
+
+        String resultado = leitor.lines().collect(Collectors.joining("\n"));
+
+        leitor.close();
+
+        return resultado;
+    }
 
     /*public Vinho sugerirVinho() {
 

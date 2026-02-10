@@ -1,7 +1,4 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class GerenteBancoDados {
 
@@ -36,6 +33,36 @@ public class GerenteBancoDados {
             e.printStackTrace();
 
             return -1;
+        }
+    }
+
+    public boolean tabelaExiste(String tabela){
+
+        ResultSet resultSet = null;
+        try {
+            resultSet = obterConexao().getMetaData().getTables(null, null, tabela, null);
+
+            return resultSet.isBeforeFirst();
+
+        } catch (SQLException | ClassNotFoundException e) {
+
+            e.printStackTrace();
+
+            return false;
+        }
+    }
+
+    public void criarTabela(String query){
+
+        try {
+
+            Statement statement = obterConexao().createStatement();
+
+            statement.executeUpdate("CREATE TABLE " + query);
+
+        } catch (SQLException | ClassNotFoundException e) {
+
+            e.printStackTrace();
         }
     }
 }

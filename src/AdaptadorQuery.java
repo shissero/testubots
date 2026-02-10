@@ -1,3 +1,4 @@
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +44,41 @@ public class AdaptadorQuery {
         List<String> strings = new ArrayList<>();
 
         for (Vinho vinho : vinhos) strings.add(AdaptadorQuery.vinho(vinho));
+
+        return String.join(", ", strings);
+    }
+
+    public static String compraCampos(){
+
+        return "(codigo, data, cliente)";
+    }
+
+    public static String compra(Compra compra){
+
+        return "(\"" + compra.obterCodigo() + "\", \""
+                + compra.obterData().format(DateTimeFormatter.ofPattern(JSONDeserializerLocalDate.pattern)) + "\", \""
+                + compra.obterCliente() + "\")";
+    }
+
+    public static String listaCompras(List<Compra> compras){
+
+        List<String> strings = new ArrayList<>();
+
+        for (Compra compra : compras) strings.add(AdaptadorQuery.compra(compra));
+
+        return String.join(", ", strings);
+    }
+
+    public static String itemCampos(){
+
+        return "(codigo)";
+    }
+
+    public static String listaItem(List<Vinho> itens){
+
+        List<String> strings = new ArrayList<>();
+
+        for (Vinho vinho : itens) strings.add("(\"" + vinho.obterCodigo().toString() + "\")");
 
         return String.join(", ", strings);
     }

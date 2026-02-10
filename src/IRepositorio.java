@@ -89,9 +89,19 @@ public class IRepositorio {
         return todosVinhos.stream().filter(el -> el.compararCaracteristicas(vinho)).findFirst();
     }
 
+    public List<Vinho> obterTodosVinhos(){
+
+        return todosVinhos.stream().map(Vinho::new).collect(Collectors.toList());
+    }
+
     public Optional<Compra> buscarCompraPorCodigo(UUID id){
 
         return todasAsCompras.stream().filter(el -> el.obterCodigo().equals(id)).findFirst();
+    }
+
+    public List<Compra> obterTodasCompras(){
+
+        return todasAsCompras.stream().map(Compra::new).collect(Collectors.toList());
     }
 
     void atualizar(Cliente cli_novo) {
